@@ -3,6 +3,7 @@ import { TerminalInterface } from '@/components/TerminalInterface';
 import { ProjectObliviaASCII } from '@/components/ASCIIArt';
 import { TypewriterText } from '@/components/TypewriterText';
 import { GlitchText } from '@/components/GlitchText';
+import { TopNavigation } from '@/components/TopNavigation';
 
 const Index = () => {
   const [showSubheading, setShowSubheading] = useState(false);
@@ -23,24 +24,28 @@ const Index = () => {
   }, []);
 
   return (
-    <TerminalInterface>
-      <div className="max-w-6xl mx-auto">
-        {/* ASCII Header */}
-        <ProjectObliviaASCII />
-        
-        {/* Main Subtitle */}
-        <div className="text-center mb-8">
-          {showSubheading && (
-            <div className="animate-fade-in-lag">
-              <TypewriterText
-                text="Four AI agents. One website. Infinite sabotage. Watch chaos unfold live."
-                className="text-lg md:text-xl text-terminal-green block mb-4"
-                speed={30}
-                onComplete={() => setTimeout(() => setShowDescription(true), 1000)}
-              />
-            </div>
-          )}
-        </div>
+    <>
+      <TopNavigation />
+      <TerminalInterface>
+        <div className="w-full">
+          {/* ASCII Header */}
+          <ProjectObliviaASCII />
+          
+          {/* Main Subtitle with Lag Animation */}
+          <div className="text-center mb-8">
+            {showSubheading && (
+              <div className="animate-fade-in-lag">
+                <div className="laggy-text">
+                  <TypewriterText
+                    text="Four AI agents. One website. Infinite sabotage. Watch chaos unfold live."
+                    className="text-lg md:text-xl text-terminal-green block mb-4"
+                    speed={30}
+                    onComplete={() => setTimeout(() => setShowDescription(true), 1000)}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
 
         {/* Description */}
         {showDescription && (
@@ -115,8 +120,9 @@ const Index = () => {
             </div>
           </div>
         )}
-      </div>
-    </TerminalInterface>
+        </div>
+      </TerminalInterface>
+    </>
   );
 };
 

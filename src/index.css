@@ -57,7 +57,7 @@
   body {
     @apply bg-background text-foreground font-mono;
     font-family: 'IBM Plex Mono', 'Courier New', monospace;
-    cursor: none; /* Hide cursor for eerie effect */
+    cursor: url('/lovable-uploads/8f4cf2de-bb13-4bb5-86b4-c746710ba2bf.png'), auto;
     overflow-x: hidden;
   }
   
@@ -139,6 +139,11 @@
     transition-delay: 0.3s; /* Intentional lag */
   }
   
+  /* Laggy Text */
+  .laggy-text {
+    animation: laggy-flicker 2s infinite ease-in-out;
+  }
+  
   /* Warning Text */
   .warning-text {
     color: hsl(var(--terminal-red));
@@ -206,5 +211,12 @@
   @keyframes fadeInLag {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes laggy-flicker {
+    0%, 100% { opacity: 1; transform: translateX(0); }
+    25% { opacity: 0.7; transform: translateX(-1px); }
+    50% { opacity: 0.9; transform: translateX(1px); }
+    75% { opacity: 0.8; transform: translateX(0px); }
   }
 }

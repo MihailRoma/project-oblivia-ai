@@ -110,6 +110,12 @@ export default {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "laggy-flicker": {
+          "0%, 100%": { opacity: "1", transform: "translateX(0)" },
+          "25%": { opacity: "0.7", transform: "translateX(-1px)" },
+          "50%": { opacity: "0.9", transform: "translateX(1px)" },
+          "75%": { opacity: "0.8", transform: "translateX(0px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -120,6 +126,7 @@ export default {
         flicker: "flicker 2s infinite",
         "slide-in-left": "slide-in-left 0.8s ease-out",
         "fade-in-lag": "fade-in-lag 1.5s ease-out",
+        "laggy-flicker": "laggy-flicker 3s infinite ease-in-out",
       },
     },
   },

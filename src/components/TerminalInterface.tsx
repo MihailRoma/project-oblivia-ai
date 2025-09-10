@@ -18,7 +18,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ children }
   return (
     <div className="min-h-screen bg-background text-foreground font-terminal relative scanlines">
       {/* Status Bar */}
-      <div className="status-bar">
+      <div className="status-bar mt-12">
         <span className="warning-text">Quarantine Status: UNSTABLE</span>
         <span className="ml-4 text-terminal-gray">•</span>
         <span className="ml-2 text-terminal-gray">Agents: 4</span>
@@ -27,13 +27,13 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ children }
       </div>
       
       {/* Main Terminal Window */}
-      <div className="terminal-window min-h-[calc(100vh-2rem)] m-2">
+      <div className="terminal-window min-h-[calc(100vh-6rem)] m-2 mt-0 flex items-center justify-center">
         {isLoaded ? (
-          <div className="p-6">
+          <div className="w-full max-w-6xl mx-auto">
             {children}
           </div>
         ) : (
-          <div className="p-6 flex items-center justify-center h-96">
+          <div className="flex items-center justify-center">
             <div className="typing-text">INITIALIZING PROJECT OBLIVIA...</div>
           </div>
         )}
