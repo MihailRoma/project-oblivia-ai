@@ -224,9 +224,9 @@
     border-radius: 0;
   }
   
-  /* Crazy lagging animation for Observatory */
-  .animate-crazy-lag {
-    animation: crazy-lag 0.8s ease-in-out;
+  /* Crazy fast glitch animation for Observatory button */
+  .animate-crazy-glitch {
+    animation: crazy-glitch 0.6s ease-in-out;
   }
 }
 
@@ -396,5 +396,30 @@
     80% { transform: translate(1px, 2px) scale(1.01); opacity: 0.7; filter: sepia(1); }
     90% { transform: translate(0px, -1px) scale(0.99); opacity: 0.95; filter: none; }
     100% { transform: translate(0) scale(1); opacity: 1; filter: none; }
+  }
+
+  /* Intense fast glitch animation for Observatory button */
+  @keyframes crazy-glitch {
+    0% { transform: translate(0) scale(1) rotate(0deg); opacity: 1; filter: none; }
+    5% { transform: translate(-8px, 4px) scale(0.9) rotate(-2deg); opacity: 0.1; filter: blur(2px) hue-rotate(90deg); }
+    10% { transform: translate(6px, -8px) scale(1.2) rotate(3deg); opacity: 0.9; filter: invert(1) contrast(3); }
+    15% { transform: translate(-4px, 6px) scale(0.8) rotate(-1deg); opacity: 0.2; filter: saturate(5) brightness(2); }
+    20% { transform: translate(9px, -3px) scale(1.1) rotate(4deg); opacity: 0.7; filter: sepia(1) blur(1px); }
+    25% { transform: translate(-7px, -5px) scale(0.95) rotate(-3deg); opacity: 0.3; filter: hue-rotate(180deg) contrast(2); }
+    30% { transform: translate(5px, 8px) scale(1.05) rotate(2deg); opacity: 0.8; filter: invert(1) saturate(3); }
+    35% { transform: translate(-3px, -7px) scale(0.9) rotate(-4deg); opacity: 0.1; filter: blur(3px) brightness(3); }
+    40% { transform: translate(7px, 2px) scale(1.15) rotate(1deg); opacity: 0.9; filter: contrast(4) sepia(1); }
+    45% { transform: translate(-6px, 4px) scale(0.85) rotate(-2deg); opacity: 0.4; filter: hue-rotate(270deg); }
+    50% { transform: translate(4px, -6px) scale(1.08) rotate(3deg); opacity: 0.6; filter: invert(1) blur(1px); }
+    55% { transform: translate(-8px, 1px) scale(0.92) rotate(-1deg); opacity: 0.2; filter: saturate(4) contrast(3); }
+    60% { transform: translate(3px, 7px) scale(1.12) rotate(2deg); opacity: 0.85; filter: brightness(2) sepia(1); }
+    65% { transform: translate(-5px, -4px) scale(0.88) rotate(-3deg); opacity: 0.3; filter: hue-rotate(45deg) blur(2px); }
+    70% { transform: translate(8px, -1px) scale(1.07) rotate(4deg); opacity: 0.75; filter: invert(1) contrast(2); }
+    75% { transform: translate(-2px, 5px) scale(0.93) rotate(-2deg); opacity: 0.5; filter: saturate(3) brightness(1.5); }
+    80% { transform: translate(6px, -7px) scale(1.04) rotate(1deg); opacity: 0.8; filter: blur(1px) hue-rotate(135deg); }
+    85% { transform: translate(-4px, 3px) scale(0.96) rotate(-1deg); opacity: 0.6; filter: contrast(2) sepia(0.5); }
+    90% { transform: translate(2px, -2px) scale(1.02) rotate(0.5deg); opacity: 0.9; filter: saturate(2); }
+    95% { transform: translate(-1px, 1px) scale(0.99) rotate(-0.2deg); opacity: 0.95; filter: blur(0.5px); }
+    100% { transform: translate(0) scale(1) rotate(0deg); opacity: 1; filter: none; }
   }
 }

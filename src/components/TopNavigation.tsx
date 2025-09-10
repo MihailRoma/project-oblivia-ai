@@ -12,11 +12,11 @@ export const TopNavigation: React.FC = () => {
   };
 
   const handleObservatoryClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.classList.add('animate-crazy-lag');
+    e.currentTarget.classList.add('animate-crazy-glitch');
     setTimeout(() => {
-      e.currentTarget.classList.remove('animate-crazy-lag');
+      e.currentTarget.classList.remove('animate-crazy-glitch');
       setObservatoryOpen(!observatoryOpen);
-    }, 800);
+    }, 600);
   };
 
   return (
@@ -57,16 +57,16 @@ export const TopNavigation: React.FC = () => {
             
             {/* Observatory Dropdown */}
             {observatoryOpen && (
-              <div className="absolute right-0 top-full mt-1 bg-[hsl(var(--cli-bg-secondary))] border border-border min-w-[200px] z-50 shadow-lg">
+              <div className="absolute right-0 top-full mt-1 bg-[hsl(var(--background))] border border-border min-w-[200px] z-50 shadow-lg backdrop-blur-sm animate-fade-in">
                 <button
-                  className="bg-[hsl(var(--cli-bg-secondary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-border hover:bg-terminal-pink/5 w-full text-left"
+                  className="bg-[hsl(var(--background))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-border hover:bg-terminal-pink/10 w-full text-left"
                   onClick={handleButtonClick}
                 >
                   <Activity size={16} />
                   Watch logs live
                 </button>
                 <button
-                  className="bg-[hsl(var(--cli-bg-secondary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm hover:bg-terminal-pink/5 w-full text-left"
+                  className="bg-[hsl(var(--background))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm hover:bg-terminal-pink/10 w-full text-left"
                   onClick={handleButtonClick}
                 >
                   <Globe size={16} />
