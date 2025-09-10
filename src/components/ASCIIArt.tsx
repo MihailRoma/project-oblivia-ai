@@ -18,8 +18,8 @@ export const ProjectObliviaASCII: React.FC = () => {
   `;
 
   return (
-    <div className="ascii-art text-center mb-8 mt-24 pt-20 animate-fade-in">
-      <pre className="text-[6px] sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] leading-none overflow-hidden whitespace-pre font-mono">
+    <div className="ascii-art text-center mb-8 mt-32 pt-24 animate-fade-in">
+      <pre className="text-[8px] sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] leading-none overflow-hidden whitespace-pre font-mono">
         {asciiText}
       </pre>
     </div>
