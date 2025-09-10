@@ -47,7 +47,7 @@ export const TypewriterText: React.FC<TypewriterTextProps> = ({
     <span className={className}>
       {displayText}
       {isStarted && currentIndex < text.length && (
-        <span className="animate-blink text-terminal-green">█</span>
+        <span className="animate-blink text-terminal-pink">█</span>
       )}
     </span>
   );

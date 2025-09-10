@@ -31,18 +31,27 @@ const Index = () => {
           {/* ASCII Header */}
           <ProjectObliviaASCII />
           
-          {/* Main Subtitle with Lag Animation */}
+          {/* Main Subtitle with Virus Glitch Animation */}
           <div className="text-center mb-8">
             {showSubheading && (
               <div className="animate-fade-in-lag">
-                <div className="laggy-text">
+                <div className="animate-virus-glitch">
                   <TypewriterText
                     text="Four AI agents. One website. Infinite sabotage. Watch chaos unfold live."
-                    className="text-lg md:text-xl text-terminal-green block mb-4"
+                    className="text-lg md:text-xl text-terminal-pink block mb-4 italic"
                     speed={30}
                     onComplete={() => setTimeout(() => setShowDescription(true), 1000)}
                   />
                 </div>
+              </div>
+            )}
+            
+            {/* Testing Mode Text */}
+            {showSubheading && (
+              <div className="mt-6 animate-fade-in-lag" style={{ animationDelay: '1s' }}>
+                <button className="text-terminal-pink hover:text-terminal-red transition-colors duration-300 underline decoration-dotted underline-offset-4 hover:no-underline cursor-pointer text-sm">
+                  Testing Mode (Backrooms)
+                </button>
               </div>
             )}
           </div>

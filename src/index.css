@@ -8,11 +8,11 @@
 
 @layer base {
   :root {
-    /* Terminal Color Scheme */
+    /* Backrooms Color Scheme - Pink/Salmon theme */
     --background: 0 0% 0%;          /* Pure black */
-    --foreground: 120 100% 50%;     /* Terminal green #00FF00 */
+    --foreground: 350 100% 75%;     /* Pink/salmon primary */
     
-    --terminal-green: 120 100% 50%; /* #00FF00 */
+    --terminal-pink: 350 100% 75%;  /* Main pink #FF7F9F */
     --terminal-amber: 60 100% 50%;  /* #FFFF00 */
     --terminal-red: 0 100% 50%;     /* #FF0000 */
     --terminal-white: 0 0% 90%;     /* Off-white */
@@ -22,15 +22,15 @@
     --glitch-cyan: 180 100% 50%;    /* Glitch accent */
     
     /* CLI Interface */
-    --cli-border: 120 100% 25%;     /* Darker green for borders */
+    --cli-border: 350 100% 35%;     /* Darker pink for borders */
     --cli-bg-secondary: 0 0% 5%;    /* Very dark gray */
     --warning-bg: 0 100% 10%;       /* Dark red background */
     
-    --primary: var(--terminal-green);
+    --primary: var(--terminal-pink);
     --primary-foreground: var(--background);
     
     --secondary: var(--cli-bg-secondary);
-    --secondary-foreground: var(--terminal-green);
+    --secondary-foreground: var(--terminal-pink);
     
     --accent: var(--terminal-red);
     --accent-foreground: var(--terminal-white);
@@ -43,7 +43,7 @@
     
     --border: var(--cli-border);
     --input: var(--cli-bg-secondary);
-    --ring: var(--terminal-green);
+    --ring: var(--terminal-pink);
     
     --radius: 0rem; /* Sharp edges for terminal look */
   }
@@ -67,7 +67,7 @@
     position: fixed;
     width: 2px;
     height: 1rem;
-    background: hsl(var(--terminal-green));
+    background: hsl(var(--terminal-pink));
     animation: blink 1s infinite;
     pointer-events: none;
     z-index: 9999;
@@ -78,7 +78,7 @@
   /* Terminal Window */
   .terminal-window {
     @apply bg-background border border-border;
-    box-shadow: 0 0 20px hsl(var(--terminal-green) / 0.3);
+    box-shadow: 0 0 20px hsl(var(--terminal-pink) / 0.3);
   }
   
   /* Status Bar */
@@ -90,7 +90,7 @@
   /* Glitch Text Effects */
   .glitch-text {
     position: relative;
-    color: hsl(var(--terminal-green));
+    color: hsl(var(--terminal-pink));
     font-weight: 700;
   }
   
@@ -121,21 +121,21 @@
     font-family: 'IBM Plex Mono', monospace;
     line-height: 1;
     white-space: pre;
-    color: hsl(var(--terminal-green));
-    text-shadow: 0 0 10px hsl(var(--terminal-green) / 0.5);
+    color: hsl(var(--terminal-pink));
+    text-shadow: 0 0 10px hsl(var(--terminal-pink) / 0.5);
   }
   
   /* Typing Animation */
   .typing-text {
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid hsl(var(--terminal-green));
+    border-right: 2px solid hsl(var(--terminal-pink));
     animation: typing 2s steps(40) infinite, blink 1s infinite;
   }
   
   /* Laggy Button */
   .laggy-button {
-    @apply bg-[hsl(var(--cli-bg-secondary))] border border-border px-4 py-2 transition-all duration-500 hover:bg-[hsl(var(--terminal-green))] hover:text-background;
+    @apply bg-[hsl(var(--cli-bg-secondary))] border border-border px-4 py-2 transition-all duration-500 hover:bg-[hsl(var(--terminal-pink))] hover:text-background;
     transition-delay: 0.3s; /* Intentional lag */
   }
   
@@ -162,8 +162,8 @@
       0deg,
       transparent,
       transparent 2px,
-      rgba(0, 255, 0, 0.03) 2px,
-      rgba(0, 255, 0, 0.03) 4px
+      rgba(255, 127, 159, 0.03) 2px,
+      rgba(255, 127, 159, 0.03) 4px
     );
     pointer-events: none;
   }
@@ -214,9 +214,44 @@
   }
   
   @keyframes laggy-flicker {
-    0%, 100% { opacity: 1; transform: translateX(0); }
-    25% { opacity: 0.7; transform: translateX(-1px); }
-    50% { opacity: 0.9; transform: translateX(1px); }
-    75% { opacity: 0.8; transform: translateX(0px); }
+    0%, 98% { opacity: 1; transform: translateX(0); }
+    98.5% { opacity: 0.3; transform: translateX(-2px) scaleY(0.95); }
+    99% { opacity: 0.8; transform: translateX(2px) scaleY(1.05); }
+    99.5% { opacity: 0.1; transform: translateX(-1px) scaleY(0.9); }
+    100% { opacity: 1; transform: translateX(0) scaleY(1); }
+  }
+  
+  /* Sudden virus-like glitch animation */
+  @keyframes virus-glitch {
+    0%, 95% { 
+      opacity: 1; 
+      transform: translateX(0) scaleX(1); 
+      filter: none;
+    }
+    95.1% { 
+      opacity: 0.2; 
+      transform: translateX(-3px) scaleX(0.95); 
+      filter: hue-rotate(180deg);
+    }
+    96% { 
+      opacity: 0.8; 
+      transform: translateX(4px) scaleX(1.1); 
+      filter: invert(1);
+    }
+    97% { 
+      opacity: 0.1; 
+      transform: translateX(-2px) scaleX(0.9); 
+      filter: saturate(3);
+    }
+    98% { 
+      opacity: 0.9; 
+      transform: translateX(1px) scaleX(1.05); 
+      filter: contrast(2);
+    }
+    100% { 
+      opacity: 1; 
+      transform: translateX(0) scaleX(1); 
+      filter: none;
+    }
   }
 }

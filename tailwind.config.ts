@@ -49,7 +49,7 @@ export default {
         },
         // Terminal-specific colors
         terminal: {
-          green: "hsl(var(--terminal-green))",
+          pink: "hsl(var(--terminal-pink))",
           amber: "hsl(var(--terminal-amber))",
           red: "hsl(var(--terminal-red))",
           white: "hsl(var(--terminal-white))",
@@ -111,10 +111,43 @@ export default {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "laggy-flicker": {
-          "0%, 100%": { opacity: "1", transform: "translateX(0)" },
-          "25%": { opacity: "0.7", transform: "translateX(-1px)" },
-          "50%": { opacity: "0.9", transform: "translateX(1px)" },
-          "75%": { opacity: "0.8", transform: "translateX(0px)" },
+          "0%, 98%": { opacity: "1", transform: "translateX(0)" },
+          "98.5%": { opacity: "0.3", transform: "translateX(-2px) scaleY(0.95)" },
+          "99%": { opacity: "0.8", transform: "translateX(2px) scaleY(1.05)" },
+          "99.5%": { opacity: "0.1", transform: "translateX(-1px) scaleY(0.9)" },
+          "100%": { opacity: "1", transform: "translateX(0) scaleY(1)" },
+        },
+        "virus-glitch": {
+          "0%, 95%": { 
+            opacity: "1", 
+            transform: "translateX(0) scaleX(1)", 
+            filter: "none" 
+          },
+          "95.1%": { 
+            opacity: "0.2", 
+            transform: "translateX(-3px) scaleX(0.95)", 
+            filter: "hue-rotate(180deg)" 
+          },
+          "96%": { 
+            opacity: "0.8", 
+            transform: "translateX(4px) scaleX(1.1)", 
+            filter: "invert(1)" 
+          },
+          "97%": { 
+            opacity: "0.1", 
+            transform: "translateX(-2px) scaleX(0.9)", 
+            filter: "saturate(3)" 
+          },
+          "98%": { 
+            opacity: "0.9", 
+            transform: "translateX(1px) scaleX(1.05)", 
+            filter: "contrast(2)" 
+          },
+          "100%": { 
+            opacity: "1", 
+            transform: "translateX(0) scaleX(1)", 
+            filter: "none" 
+          }
         },
       },
       animation: {
@@ -126,7 +159,8 @@ export default {
         flicker: "flicker 2s infinite",
         "slide-in-left": "slide-in-left 0.8s ease-out",
         "fade-in-lag": "fade-in-lag 1.5s ease-out",
-        "laggy-flicker": "laggy-flicker 3s infinite ease-in-out",
+        "laggy-flicker": "laggy-flicker 8s infinite ease-in-out",
+        "virus-glitch": "virus-glitch 12s infinite ease-in-out",
       },
     },
   },

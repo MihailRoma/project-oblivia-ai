@@ -16,7 +16,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ children }
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-terminal relative scanlines">
+    <div className="min-h-screen bg-background text-foreground font-terminal relative scanlines overflow-hidden">
       {/* Status Bar */}
       <div className="status-bar mt-12">
         <span className="warning-text">Quarantine Status: UNSTABLE</span>
@@ -27,7 +27,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ children }
       </div>
       
       {/* Main Terminal Window */}
-      <div className="terminal-window min-h-[calc(100vh-6rem)] m-2 mt-0 flex items-center justify-center">
+      <div className="terminal-window h-[calc(100vh-6rem)] m-2 mt-0 flex items-center justify-center overflow-hidden">
         {isLoaded ? (
           <div className="w-full max-w-6xl mx-auto">
             {children}
@@ -40,7 +40,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ children }
       </div>
       
       {/* Terminal Cursor */}
-      <div className="fixed bottom-4 right-4 text-terminal-green animate-blink">
+      <div className="fixed bottom-4 right-4 text-terminal-pink animate-blink">
         <span className="text-xs">█</span>
       </div>
     </div>
