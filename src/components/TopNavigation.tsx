@@ -11,6 +11,14 @@ export const TopNavigation: React.FC = () => {
     }, 800);
   };
 
+  const handleObservatoryClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.classList.add('animate-crazy-lag');
+    setTimeout(() => {
+      e.currentTarget.classList.remove('animate-crazy-lag');
+      setObservatoryOpen(!observatoryOpen);
+    }, 800);
+  };
+
   return (
     <>
       {/* Navigation Bar */}
@@ -19,19 +27,19 @@ export const TopNavigation: React.FC = () => {
           {/* Left side navigation */}
           <div className="flex space-x-6">
             <button 
-              className="laggy-button text-terminal-white hover:text-terminal-pink transition-colors text-sm"
+              className="bg-[hsl(var(--cli-bg-secondary))] border-none px-4 py-2 text-terminal-white hover:text-terminal-pink transition-colors text-sm"
               onClick={handleButtonClick}
             >
               About
             </button>
             <button 
-              className="laggy-button text-terminal-white hover:text-terminal-pink transition-colors text-sm"
+              className="bg-[hsl(var(--cli-bg-secondary))] border-none px-4 py-2 text-terminal-white hover:text-terminal-pink transition-colors text-sm"
               onClick={handleButtonClick}
             >
               Transparency
             </button>
             <button 
-              className="laggy-button text-terminal-white hover:text-terminal-pink transition-colors text-sm"
+              className="bg-[hsl(var(--cli-bg-secondary))] border-none px-4 py-2 text-terminal-white hover:text-terminal-pink transition-colors text-sm"
               onClick={handleButtonClick}
             >
               Twitter
@@ -41,11 +49,8 @@ export const TopNavigation: React.FC = () => {
           {/* Right side - Observatory */}
           <div className="relative">
             <button
-              onClick={(e) => {
-                handleButtonClick(e);
-                setTimeout(() => setObservatoryOpen(!observatoryOpen), 300);
-              }}
-              className="observatory-button flex items-center gap-2 text-terminal-pink hover:text-terminal-white transition-colors text-sm px-3 py-1 border border-terminal-pink hover:bg-terminal-pink/10"
+              onClick={handleObservatoryClick}
+              className="observatory-button flex items-center gap-2 text-terminal-pink hover:text-terminal-white transition-colors text-sm px-4 py-2 border border-terminal-pink hover:bg-terminal-pink/20"
             >
               Observatory <Eye size={16} />
             </button>
@@ -54,14 +59,14 @@ export const TopNavigation: React.FC = () => {
             {observatoryOpen && (
               <div className="absolute right-0 top-full mt-1 bg-[hsl(var(--cli-bg-secondary))] border border-border min-w-[200px] z-50 shadow-lg">
                 <button
-                  className="laggy-button flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-border hover:bg-terminal-pink/5 w-full text-left"
+                  className="bg-[hsl(var(--cli-bg-secondary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-border hover:bg-terminal-pink/5 w-full text-left"
                   onClick={handleButtonClick}
                 >
                   <Activity size={16} />
                   Watch logs live
                 </button>
                 <button
-                  className="laggy-button flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm hover:bg-terminal-pink/5 w-full text-left"
+                  className="bg-[hsl(var(--cli-bg-secondary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm hover:bg-terminal-pink/5 w-full text-left"
                   onClick={handleButtonClick}
                 >
                   <Globe size={16} />

@@ -35,7 +35,7 @@ const Index = () => {
           <div className="text-center mb-8">
             {showSubheading && (
               <div className="animate-fade-in">
-                <div className="advanced-glitch">
+                <div className="advanced-glitch" data-text="Four AI agents. One website. Infinite sabotage. Watch chaos unfold live.">
                   <TypewriterText
                     text="Four AI agents. One website. Infinite sabotage. Watch chaos unfold live."
                     className="text-base md:text-lg text-terminal-pink block mb-4 italic"
@@ -58,7 +58,7 @@ const Index = () => {
             
             {/* Testing Mode Text */}
             <div className="mt-6 animate-fade-in-lag" style={{ animationDelay: '2s' }}>
-              <button className="laggy-button text-terminal-pink hover:text-terminal-red transition-colors duration-300 underline decoration-dotted underline-offset-4 hover:no-underline cursor-pointer text-sm">
+              <button className="bg-transparent border-none text-terminal-pink hover:text-terminal-red transition-colors duration-300 underline decoration-dotted underline-offset-4 hover:no-underline cursor-pointer text-sm">
                 Testing Mode (Backrooms)
               </button>
             </div>

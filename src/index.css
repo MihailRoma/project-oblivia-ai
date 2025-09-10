@@ -192,37 +192,41 @@
   .advanced-glitch {
     position: relative;
     display: inline-block;
+    animation: timed-glitch 15s infinite;
   }
   
   .advanced-glitch::before,
   .advanced-glitch::after {
-    content: '';
+    content: attr(data-text);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: inherit;
-    color: inherit;
     opacity: 0;
+    pointer-events: none;
   }
   
-  .advanced-glitch:hover::before {
-    animation: advanced-glitch-1 0.3s ease-out;
-    background: linear-gradient(45deg, hsl(var(--glitch-cyan)), transparent);
-    mix-blend-mode: screen;
+  .advanced-glitch::before {
+    color: hsl(var(--glitch-cyan));
+    animation: timed-glitch-1 15s infinite;
   }
   
-  .advanced-glitch:hover::after {
-    animation: advanced-glitch-2 0.3s ease-out 0.1s;
-    background: linear-gradient(-45deg, hsl(var(--terminal-red)), transparent);
-    mix-blend-mode: multiply;
+  .advanced-glitch::after {
+    color: hsl(var(--terminal-red));
+    animation: timed-glitch-2 15s infinite;
   }
   
   /* Observatory Button */
   .observatory-button {
-    background: rgba(255, 127, 159, 0.05);
+    background: rgba(255, 127, 159, 0.1);
     backdrop-filter: blur(2px);
+    border-radius: 0;
+  }
+  
+  /* Crazy lagging animation for Observatory */
+  .animate-crazy-lag {
+    animation: crazy-lag 0.8s ease-in-out;
   }
 }
 
@@ -331,5 +335,66 @@
     25% { opacity: 0; transform: translate(-2px, 1px); }
     35% { opacity: 1; transform: translate(1px, -2px); }
     45% { opacity: 0; transform: translate(-1px, 2px); }
+  }
+  
+  /* Timed glitch animations that play every 10-15 seconds */
+  @keyframes timed-glitch {
+    0%, 85% { 
+      transform: translate(0);
+      filter: none;
+    }
+    85.1% { 
+      transform: translate(-2px, 1px);
+      filter: hue-rotate(90deg);
+    }
+    86% { 
+      transform: translate(2px, -1px);
+      filter: invert(1);
+    }
+    87% { 
+      transform: translate(-1px, 2px);
+      filter: contrast(2);
+    }
+    88% { 
+      transform: translate(1px, -2px);
+      filter: saturate(3);
+    }
+    89%, 100% { 
+      transform: translate(0);
+      filter: none;
+    }
+  }
+  
+  @keyframes timed-glitch-1 {
+    0%, 85% { opacity: 0; transform: translate(0); }
+    85.1% { opacity: 0.8; transform: translate(-3px, 2px); }
+    86% { opacity: 0.3; transform: translate(3px, -2px); }
+    87% { opacity: 0.9; transform: translate(-2px, 3px); }
+    88% { opacity: 0.1; transform: translate(2px, -3px); }
+    89%, 100% { opacity: 0; transform: translate(0); }
+  }
+  
+  @keyframes timed-glitch-2 {
+    0%, 85% { opacity: 0; transform: translate(0); }
+    85.2% { opacity: 0.6; transform: translate(3px, -2px); }
+    86.2% { opacity: 0.4; transform: translate(-3px, 2px); }
+    87.2% { opacity: 0.8; transform: translate(2px, -3px); }
+    88.2% { opacity: 0.2; transform: translate(-2px, 3px); }
+    89%, 100% { opacity: 0; transform: translate(0); }
+  }
+  
+  /* Crazy lag animation for Observatory button */
+  @keyframes crazy-lag {
+    0% { transform: translate(0) scale(1); opacity: 1; filter: none; }
+    10% { transform: translate(-5px, 2px) scale(0.95); opacity: 0.3; filter: blur(1px); }
+    20% { transform: translate(3px, -4px) scale(1.1); opacity: 0.8; filter: invert(1); }
+    30% { transform: translate(-2px, 3px) scale(0.9); opacity: 0.1; filter: hue-rotate(180deg); }
+    40% { transform: translate(4px, -1px) scale(1.05); opacity: 0.6; filter: contrast(2); }
+    50% { transform: translate(-3px, -2px) scale(0.98); opacity: 0.2; filter: saturate(3); }
+    60% { transform: translate(2px, 4px) scale(1.02); opacity: 0.9; filter: brightness(2); }
+    70% { transform: translate(-1px, -3px) scale(0.96); opacity: 0.4; filter: blur(2px); }
+    80% { transform: translate(1px, 2px) scale(1.01); opacity: 0.7; filter: sepia(1); }
+    90% { transform: translate(0px, -1px) scale(0.99); opacity: 0.95; filter: none; }
+    100% { transform: translate(0) scale(1); opacity: 1; filter: none; }
   }
 }
