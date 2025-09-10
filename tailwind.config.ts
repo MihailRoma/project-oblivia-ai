@@ -106,6 +106,10 @@ export default {
           "0%": { transform: "translateX(-100%)", opacity: "0" },
           "100%": { transform: "translateX(0)", opacity: "1" },
         },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         "fade-in-lag": {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
@@ -158,8 +162,9 @@ export default {
         typing: "typing 3s infinite",
         flicker: "flicker 2s infinite",
         "slide-in-left": "slide-in-left 0.8s ease-out",
-        "fade-in-lag": "fade-in-lag 1.5s ease-out",
-        "laggy-flicker": "laggy-flicker 8s infinite ease-in-out",
+        "fade-in": "fade-in 2s ease-out",
+        "fade-in-lag": "fade-in-lag 2s ease-out",
+        "laggy-flicker": "laggy-flicker 0.8s ease-in-out",
         "virus-glitch": "virus-glitch 12s infinite ease-in-out",
       },
     },

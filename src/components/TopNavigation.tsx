@@ -1,44 +1,70 @@
 import React, { useState } from 'react';
-import { Eye } from 'lucide-react';
+import { Eye, Activity, Globe } from 'lucide-react';
 
 export const TopNavigation: React.FC = () => {
   const [observatoryOpen, setObservatoryOpen] = useState(false);
 
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    e.currentTarget.classList.add('animate-laggy-flicker');
+    setTimeout(() => {
+      e.currentTarget.classList.remove('animate-laggy-flicker');
+    }, 800);
+  };
+
   return (
     <>
-      {/* Top Navigation Panel */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-cli-border">
-        <div className="flex justify-between items-center px-6 py-3">
-          {/* Left Navigation Items */}
-          <div className="flex items-center space-x-8">
-            <button className="text-terminal-white hover:text-terminal-green transition-colors text-sm font-terminal">
+      {/* Navigation Bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-[hsl(var(--cli-bg-secondary))] border-b border-border px-4 py-2">
+        <div className="flex justify-between items-center max-w-6xl mx-auto">
+          {/* Left side navigation */}
+          <div className="flex space-x-6">
+            <button 
+              className="laggy-button text-terminal-white hover:text-terminal-pink transition-colors text-sm"
+              onClick={handleButtonClick}
+            >
               About
             </button>
-            <button className="text-terminal-white hover:text-terminal-green transition-colors text-sm font-terminal">
+            <button 
+              className="laggy-button text-terminal-white hover:text-terminal-pink transition-colors text-sm"
+              onClick={handleButtonClick}
+            >
               Transparency
             </button>
-            <button className="text-terminal-white hover:text-terminal-green transition-colors text-sm font-terminal">
+            <button 
+              className="laggy-button text-terminal-white hover:text-terminal-pink transition-colors text-sm"
+              onClick={handleButtonClick}
+            >
               Twitter
             </button>
           </div>
           
-          {/* Right Observatory Section */}
+          {/* Right side - Observatory */}
           <div className="relative">
-            <button 
-              onClick={() => setObservatoryOpen(!observatoryOpen)}
-              className="flex items-center space-x-2 text-terminal-white hover:text-terminal-green transition-colors text-sm font-terminal"
+            <button
+              onClick={(e) => {
+                handleButtonClick(e);
+                setTimeout(() => setObservatoryOpen(!observatoryOpen), 300);
+              }}
+              className="observatory-button flex items-center gap-2 text-terminal-pink hover:text-terminal-white transition-colors text-sm px-3 py-1 border border-terminal-pink hover:bg-terminal-pink/10"
             >
-              <Eye size={16} />
-              <span>Observatory</span>
+              Observatory <Eye size={16} />
             </button>
             
             {/* Observatory Dropdown */}
             {observatoryOpen && (
-              <div className="absolute top-full right-0 mt-2 bg-background border border-cli-border rounded-none min-w-[180px] animate-fade-in-lag">
-                <button className="w-full text-left px-4 py-2 text-terminal-white hover:bg-cli-secondary hover:text-terminal-green transition-colors text-sm font-terminal border-b border-cli-border">
+              <div className="absolute right-0 top-full mt-1 bg-[hsl(var(--cli-bg-secondary))] border border-border min-w-[200px] z-50 shadow-lg">
+                <button
+                  className="laggy-button flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-border hover:bg-terminal-pink/5 w-full text-left"
+                  onClick={handleButtonClick}
+                >
+                  <Activity size={16} />
                   Watch logs live
                 </button>
-                <button className="w-full text-left px-4 py-2 text-terminal-white hover:bg-cli-secondary hover:text-terminal-green transition-colors text-sm font-terminal">
+                <button
+                  className="laggy-button flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm hover:bg-terminal-pink/5 w-full text-left"
+                  onClick={handleButtonClick}
+                >
+                  <Globe size={16} />
                   Website
                 </button>
               </div>
@@ -46,11 +72,11 @@ export const TopNavigation: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Overlay to close dropdown */}
       {observatoryOpen && (
-        <div 
-          className="fixed inset-0 z-40" 
+        <div
+          className="fixed inset-0 z-40"
           onClick={() => setObservatoryOpen(false)}
         />
       )}

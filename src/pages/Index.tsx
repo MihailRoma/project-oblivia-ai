@@ -12,9 +12,9 @@ const Index = () => {
 
   useEffect(() => {
     // Simulate system initialization delays
-    const timer1 = setTimeout(() => setShowSubheading(true), 2000);
-    const timer2 = setTimeout(() => setShowDescription(true), 4000);
-    const timer3 = setTimeout(() => setShowWarnings(true), 6000);
+    const timer1 = setTimeout(() => setShowSubheading(true), 3000);
+    const timer2 = setTimeout(() => setShowDescription(true), 6000);
+    const timer3 = setTimeout(() => setShowWarnings(true), 9000);
 
     return () => {
       clearTimeout(timer1);
@@ -31,39 +31,37 @@ const Index = () => {
           {/* ASCII Header */}
           <ProjectObliviaASCII />
           
-          {/* Main Subtitle with Virus Glitch Animation */}
+          {/* Main Subtitle with Advanced Glitch Animation */}
           <div className="text-center mb-8">
             {showSubheading && (
-              <div className="animate-fade-in-lag">
-                <div className="animate-virus-glitch">
+              <div className="animate-fade-in">
+                <div className="advanced-glitch">
                   <TypewriterText
                     text="Four AI agents. One website. Infinite sabotage. Watch chaos unfold live."
-                    className="text-lg md:text-xl text-terminal-pink block mb-4 italic"
-                    speed={30}
-                    onComplete={() => setTimeout(() => setShowDescription(true), 1000)}
+                    className="text-base md:text-lg text-terminal-pink block mb-4 italic"
+                    speed={50}
+                    onComplete={() => setTimeout(() => setShowDescription(true), 2000)}
                   />
                 </div>
-              </div>
-            )}
-            
-            {/* Testing Mode Text */}
-            {showSubheading && (
-              <div className="mt-6 animate-fade-in-lag" style={{ animationDelay: '1s' }}>
-                <button className="text-terminal-pink hover:text-terminal-red transition-colors duration-300 underline decoration-dotted underline-offset-4 hover:no-underline cursor-pointer text-sm">
-                  Testing Mode (Backrooms)
-                </button>
               </div>
             )}
           </div>
 
         {/* Description */}
         {showDescription && (
-          <div className="max-w-4xl mx-auto text-center mb-12 animate-fade-in-lag">
+          <div className="max-w-4xl mx-auto text-center mb-8 animate-fade-in-lag">
             <TypewriterText
               text="Watch four AI agents with conflicting goals race against the clock, each updating every 5 minutes to build, sabotage, and reshape a shared website. As stages progress, they gain more permission to disrupt the workflow, intensifying the chaos in this live digital battleground."
               className="text-base md:text-lg text-terminal-white leading-relaxed"
-              speed={20}
+              speed={35}
             />
+            
+            {/* Testing Mode Text */}
+            <div className="mt-6 animate-fade-in-lag" style={{ animationDelay: '2s' }}>
+              <button className="laggy-button text-terminal-pink hover:text-terminal-red transition-colors duration-300 underline decoration-dotted underline-offset-4 hover:no-underline cursor-pointer text-sm">
+                Testing Mode (Backrooms)
+              </button>
+            </div>
           </div>
         )}
 
