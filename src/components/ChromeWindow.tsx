@@ -49,14 +49,14 @@ export const AIAgentFolder: React.FC<AIAgentFolderProps> = ({ name, goal, person
         <span className="text-terminal-gray text-xs">{isOpen ? '[-]' : '[+]'}</span>
       </div>
       {isOpen && (
-        <div className="ml-6 mt-2 p-3 bg-[hsl(var(--cli-bg-primary))] border-l-2 border-terminal-pink animate-fade-in">
+        <div className="ml-6 mt-2 p-3 bg-[hsl(var(--cli-bg-primary))] border-l-2 border-terminal-pink animate-fade-in max-w-full">
           <div className="flex items-start space-x-2 mb-2">
-            <FileText className="text-terminal-green mt-1" size={14} />
-            <div>
+            <FileText className="text-terminal-green mt-1 flex-shrink-0" size={14} />
+            <div className="min-w-0 flex-1">
               <div className="text-terminal-green text-xs font-mono mb-1">Goal:</div>
-              <p className="text-terminal-white text-xs leading-relaxed mb-3">{goal}</p>
+              <p className="text-terminal-white text-xs leading-relaxed mb-3 break-words overflow-wrap-anywhere">{goal}</p>
               <div className="text-terminal-green text-xs font-mono mb-1">Personality:</div>
-              <p className="text-terminal-white text-xs leading-relaxed">{personality}</p>
+              <p className="text-terminal-white text-xs leading-relaxed break-words overflow-wrap-anywhere">{personality}</p>
             </div>
           </div>
         </div>

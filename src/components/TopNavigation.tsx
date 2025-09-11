@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { Eye, Activity, Globe } from 'lucide-react';
+import { NavigationContent } from './NavigationContent';
 
 export const TopNavigation: React.FC = () => {
   const [observatoryOpen, setObservatoryOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>, section?: string) => {
     e.currentTarget.classList.add('animate-laggy-flicker');
     setTimeout(() => {
       e.currentTarget.classList.remove('animate-laggy-flicker');
+      if (section) {
+        setActiveSection(section);
+      }
     }, 800);
   };
 
@@ -19,6 +24,10 @@ export const TopNavigation: React.FC = () => {
     }, 600);
   };
 
+  const handleTwitterClick = () => {
+    window.open('https://x.com/ObliviaAI', '_blank');
+  };
+
   return (
     <>
       {/* Navigation Bar */}
@@ -28,19 +37,22 @@ export const TopNavigation: React.FC = () => {
           <div className="flex space-x-6">
             <button 
               className="bg-[hsl(var(--cli-bg-secondary))] border-none px-4 py-2 text-terminal-white hover:text-terminal-pink transition-colors text-sm"
-              onClick={handleButtonClick}
+              onClick={(e) => handleButtonClick(e, 'about')}
             >
               About
             </button>
             <button 
               className="bg-[hsl(var(--cli-bg-secondary))] border-none px-4 py-2 text-terminal-white hover:text-terminal-pink transition-colors text-sm"
-              onClick={handleButtonClick}
+              onClick={(e) => handleButtonClick(e, 'transparency')}
             >
               Transparency
             </button>
             <button 
               className="bg-[hsl(var(--cli-bg-secondary))] border-none px-4 py-2 text-terminal-white hover:text-terminal-pink transition-colors text-sm"
-              onClick={handleButtonClick}
+              onClick={(e) => {
+                handleButtonClick(e);
+                handleTwitterClick();
+              }}
             >
               Twitter
             </button>
@@ -85,6 +97,12 @@ export const TopNavigation: React.FC = () => {
           onClick={() => setObservatoryOpen(false)}
         />
       )}
+
+      {/* Navigation Content */}
+      <NavigationContent 
+        activeSection={activeSection}
+        onClose={() => setActiveSection(null)}
+      />
     </>
   );
 };

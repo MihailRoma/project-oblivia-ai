@@ -9,19 +9,39 @@ export const InteractiveTerminal: React.FC = () => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<Command[]>([]);
   const [isBlinking, setIsBlinking] = useState(true);
+  const [countdown, setCountdown] = useState(227); // 3:47 in seconds
   const inputRef = useRef<HTMLInputElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
 
-  const commands: Record<string, string> = {
-    '/status': 'STATUS: EXPERIMENT ACTIVE | STAGE: 2 | COUNTDOWN: 03:47 | AGENTS ONLINE: 4/4',
-    '/agents': 'AGENT ALPHA: Hostile | AGENT BETA: Unstable | AGENT GAMMA: Rogue | AGENT DELTA: Active',
-    '/summary': 'LATEST UPDATE: Website structure modified by Agent Gamma. Unauthorized style changes detected.',
-    '/logs': 'LOG: 14:23 - Agent Alpha attempted sabotage\nLOG: 14:21 - Agent Beta modified navigation\nLOG: 14:19 - System breach detected',
-    '/help': 'AVAILABLE COMMANDS: /status /agents /summary /logs /stage /next /ping /reset /help',
-    '/stage': 'CURRENT STAGE: 2 | SABOTAGE PERMISSION: MODERATE | NEXT ESCALATION: 02:14',
-    '/next': 'NEXT UPDATE CYCLE: 04:12 remaining | AUTO-DEPLOY: ENABLED',
-    '/reset': 'CONSOLE CLEARED',
+  // Smart dynamic responses
+  const getSmartResponse = (cmd: string): string => {
+    const formatTime = (seconds: number) => {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
+
+    const commands: Record<string, string> = {
+      '/status': `STATUS: EXPERIMENT ACTIVE | STAGE: 2 | COUNTDOWN: ${formatTime(countdown)} | AGENTS ONLINE: 4/4\n[PROCESSING...] [SECURE CONNECTION ESTABLISHED] [QUANTUM ENCRYPTION: ACTIVE]`,
+      '/agents': 'AGENT ALPHA: Hostile | AGENT BETA: Unstable | AGENT GAMMA: Rogue | AGENT DELTA: Active\n[SCANNING...] [NEURAL NETWORKS: SYNCHRONIZED] [THREAT ASSESSMENT: HIGH]',
+      '/summary': 'LATEST UPDATE: Website structure modified by Agent Gamma. Unauthorized style changes detected.\n[ANALYZING...] [MEMORY FRAGMENTS RECOVERED] [TIMELINE RECONSTRUCTION: 97% COMPLETE]',
+      '/logs': 'LOG: 14:23 - Agent Alpha attempted sabotage\nLOG: 14:21 - Agent Beta modified navigation\nLOG: 14:19 - System breach detected\n[DECRYPTING...] [BLOCKCHAIN VERIFICATION] [AUDIT TRAIL: SECURED]',
+      '/help': 'AVAILABLE COMMANDS: /status /agents /summary /logs /stage /next /ping /reset /help\n[COMPILING...] [SYSTEM DOCUMENTATION LOADED] [ACCESS GRANTED]',
+      '/stage': `CURRENT STAGE: 2 | SABOTAGE PERMISSION: MODERATE | NEXT ESCALATION: ${formatTime(Math.max(countdown - 93, 0))}\n[CALCULATING...] [THREAT MATRIX UPDATED] [PERMISSIONS ESCALATING]`,
+      '/next': `NEXT UPDATE CYCLE: ${formatTime(Math.max(countdown - 35, 0))} remaining | AUTO-DEPLOY: ENABLED\n[SYNCHRONIZING...] [DEPLOYMENT PIPELINE ACTIVE] [COUNTDOWN INITIATED]`,
+      '/reset': 'CONSOLE CLEARED\n[PURGING...] [MEMORY WIPED] [SYSTEM RESET COMPLETE]',
+    };
+
+    return commands[cmd] || `UNKNOWN COMMAND: ${cmd.replace('/', '')}. Type /help for available commands.\n[ERROR...] [COMMAND NOT RECOGNIZED] [SECURITY PROTOCOLS ACTIVATED]`;
   };
+
+  // Countdown timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(prev => Math.max(prev - 1, 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +58,7 @@ export const InteractiveTerminal: React.FC = () => {
       setInput('');
       return;
     } else {
-      output = commands[cmd] || `UNKNOWN COMMAND: ${input}. Type /help for available commands.`;
+      output = getSmartResponse(cmd);
     }
 
     setHistory(prev => [...prev, { input, output }]);
