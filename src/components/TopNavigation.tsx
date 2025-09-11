@@ -82,7 +82,7 @@ export const TopNavigation: React.FC = () => {
                   onClick={handleButtonClick}
                 >
                   <Globe size={16} />
-                  Website
+                  The Experiment website
                 </button>
               </div>
             )}

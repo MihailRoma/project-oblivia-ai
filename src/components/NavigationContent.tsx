@@ -11,7 +11,7 @@ export const NavigationContent: React.FC<NavigationContentProps> = ({ activeSect
   if (!activeSection) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-95 z-[70] overflow-y-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-95 z-[80] overflow-y-auto">
       <div className="container mx-auto p-6">
         <div className="flex justify-end mb-6">
           <button

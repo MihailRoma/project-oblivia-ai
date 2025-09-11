@@ -27,7 +27,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ children }
       </div>
       
       {/* Main Terminal Window */}
-      <div className="terminal-window h-[calc(100vh-6rem)] m-2 mt-0 flex items-center justify-center overflow-y-auto">
+      <div className="terminal-window h-[calc(100vh-6rem)] m-2 mt-0 flex items-start justify-center overflow-y-auto pt-8">
         {isLoaded ? (
           <div className="w-full max-w-7xl mx-auto py-8">
             {children}
