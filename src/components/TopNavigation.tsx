@@ -57,16 +57,16 @@ export const TopNavigation: React.FC = () => {
             
             {/* Observatory Dropdown */}
             {observatoryOpen && (
-              <div className="absolute right-0 top-full mt-1 bg-[hsl(var(--background))] border border-border min-w-[200px] z-50 shadow-lg backdrop-blur-sm animate-fade-in">
+              <div className="absolute right-0 top-full mt-1 bg-[hsl(var(--cli-bg-primary))] border border-terminal-green min-w-[200px] z-[60] shadow-lg backdrop-blur-sm animate-fade-in">
                 <button
-                  className="bg-[hsl(var(--background))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-border hover:bg-terminal-pink/10 w-full text-left"
+                  className="bg-[hsl(var(--cli-bg-primary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-terminal-green hover:bg-terminal-pink/10 w-full text-left"
                   onClick={handleButtonClick}
                 >
                   <Activity size={16} />
                   Watch logs live
                 </button>
                 <button
-                  className="bg-[hsl(var(--background))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm hover:bg-terminal-pink/10 w-full text-left"
+                  className="bg-[hsl(var(--cli-bg-primary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm hover:bg-terminal-pink/10 w-full text-left"
                   onClick={handleButtonClick}
                 >
                   <Globe size={16} />

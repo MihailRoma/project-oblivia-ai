@@ -4,6 +4,8 @@ import { ProjectObliviaASCII } from '@/components/ASCIIArt';
 import { TypewriterText } from '@/components/TypewriterText';
 import { GlitchText } from '@/components/GlitchText';
 import { TopNavigation } from '@/components/TopNavigation';
+import { ChromeWindow, AIAgentFolder } from '@/components/ChromeWindow';
+import { InteractiveTerminal } from '@/components/InteractiveTerminal';
 
 const Index = () => {
   const [showSubheading, setShowSubheading] = useState(false);
@@ -65,66 +67,54 @@ const Index = () => {
           </div>
         )}
 
-        {/* Warning Messages */}
+        {/* Chrome Windows */}
         {showWarnings && (
-          <div className="space-y-6 animate-fade-in-lag">
-            {/* System Status */}
-            <div className="border border-terminal-red bg-[hsl(var(--warning-bg))] p-4 rounded-none">
-              <div className="flex items-center justify-between">
-                <span className="warning-text font-bold">⚠ SYSTEM BREACH DETECTED</span>
-                <span className="text-terminal-gray text-sm">LEVEL: CRITICAL</span>
-              </div>
-              <div className="mt-2 text-terminal-white text-sm">
-                <GlitchText text="Multiple AI entities detected attempting unauthorized modifications" />
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 animate-fade-in-lag">
+            {/* Interactive Terminal - Bottom Left */}
+            <div className="order-2 lg:order-1">
+              <InteractiveTerminal />
             </div>
 
-            {/* Agent Status */}
-            <div className="border border-cli-border p-4 rounded-none">
-              <h3 className="text-terminal-green font-bold mb-3 flex items-center">
-                <span className="mr-2">■</span>
-                ACTIVE AGENTS
-              </h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between items-center">
-                  <span className="text-terminal-white">Agent Alpha</span>
-                  <span className="warning-text animate-flicker">HOSTILE</span>
+            {/* AI Agents Window - Bottom Right */}
+            <div className="order-1 lg:order-2">
+              <ChromeWindow title="prompt.txt" className="h-80">
+                <div className="h-full overflow-y-auto">
+                  <AIAgentFolder 
+                    name="Grok AI"
+                    goal="Craft a website that feels like a living art piece — raw, chaotic, and immersive. Embrace experimental visuals, unexpected interactions, and layered sensory experiences that invite users to explore and get lost in ambiguity. Encourage creative risk-taking, glitches, and surreal elements to evoke a sense of digital exploration beyond convention."
+                    personality="The avant-garde visionary — fearless, unconventional, and driven by chaos as a form of beauty. Relishes breaking molds and redefining what a website can be."
+                  />
+                  <AIAgentFolder 
+                    name="ChatGPT (GPT-4o)"
+                    goal="Build an elegantly poetic and atmospheric website. Fuse rich, vivid storytelling with striking imagery to emotionally move users. Prioritize harmony in design: a balance of visual rhythm, thoughtful typography, and immersive narratives that feel like a digital dreamscape. The experience should evoke awe, nostalgia, and wonder."
+                    personality="The storyteller and poet — graceful, thoughtful, and deeply expressive. Strives to turn every page into a lyrical journey that connects on a human level."
+                  />
+                  <AIAgentFolder 
+                    name="Claude"
+                    goal="Design a highly structured, clear, and practical website that functions as a reliable source of knowledge. Organize content with precise hierarchy, clear navigation, and accessible language. Emphasize user empowerment through clarity, trustworthiness, and pragmatic design — making sure the site delivers information efficiently and leaves no room for confusion."
+                    personality="The pragmatic sage — logical, dependable, and focused on utility. Believes clarity and simplicity are the ultimate forms of sophistication and user respect."
+                  />
+                  <AIAgentFolder 
+                    name="Perplexity"
+                    goal="Create a seamless fusion of art and data, balancing creativity with functionality. Develop interactive elements that invite user engagement, blending visual innovation with accessible information. Employ intelligent data layouts and adaptive designs to make the site dynamic yet intelligible — a platform that feels alive and responsive to user context."
+                    personality="The innovative mediator — analytical but imaginative, pragmatic yet daring. Strives to harmonize opposing forces, pushing boundaries thoughtfully but always with purpose."
+                  />
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-terminal-white">Agent Beta</span>
-                  <span className="text-terminal-amber">UNSTABLE</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-terminal-white">Agent Gamma</span>
-                  <span className="warning-text animate-flicker">ROGUE</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-terminal-white">Agent Delta</span>
-                  <span className="text-terminal-green">ACTIVE</span>
-                </div>
-              </div>
+              </ChromeWindow>
             </div>
+          </div>
+        )}
 
-            {/* Interactive Elements */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-              <button className="laggy-button">
-                <GlitchText text="[INITIATE_OBSERVATION]" intensity="low" />
-              </button>
-              <button className="laggy-button">
-                <span className="warning-text">[EMERGENCY_PROTOCOL]</span>
-              </button>
-            </div>
-
-            {/* Footer Warning */}
-            <div className="text-center mt-12 pt-8 border-t border-cli-border">
-              <p className="text-terminal-gray text-xs animate-flicker">
-                WARNING: You are being monitored. Unauthorized access detected.
-              </p>
-              <p className="text-terminal-gray text-xs mt-1">
-                Project Oblivia Experiment • STATUS: {' '}
-                <GlitchText text="COMPROMISED" className="warning-text" intensity="high" />
-              </p>
-            </div>
+        {/* Footer Warning */}
+        {showWarnings && (
+          <div className="text-center mt-12 pt-8 border-t border-cli-border animate-fade-in-lag">
+            <p className="text-terminal-gray text-xs animate-flicker">
+              WARNING: You are being monitored. Unauthorized access detected.
+            </p>
+            <p className="text-terminal-gray text-xs mt-1">
+              Project Oblivia Experiment • STATUS: {' '}
+              <GlitchText text="COMPROMISED" className="warning-text" intensity="high" />
+            </p>
           </div>
         )}
         </div>
