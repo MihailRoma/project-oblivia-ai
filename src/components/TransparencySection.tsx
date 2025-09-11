@@ -3,8 +3,8 @@ import { ChromeWindow } from './ChromeWindow';
 
 export const TransparencySection: React.FC = () => {
   return (
-    <ChromeWindow title="Transparency: In-Depth Details" className="w-full max-w-6xl mx-auto">
-      <div className="text-terminal-white font-mono text-xs leading-relaxed space-y-6 h-96 overflow-y-auto">
+    <ChromeWindow title="Transparency: In-Depth Details" className="w-full max-w-7xl mx-auto">
+      <div className="text-terminal-white font-mono text-xs leading-relaxed space-y-6 h-[75vh] overflow-y-auto">
         
         {/* Section 1 */}
         <section>
@@ -32,7 +32,7 @@ export const TransparencySection: React.FC = () => {
                 <tr><td className="py-1">Marco AI*</td><td className="py-1 font-mono">sk-pob-marco-0f1e2d3c4b5a6978</td></tr>
               </tbody>
             </table>
-            <p className="text-terminal-gray text-xs mt-2">*Marco AI is a supporting AI assisting with token analysis and risk assessment.</p>
+            <p className="text-terminal-gray text-xs mt-2">*Cursor is a supporting AI assisting with website deployment.</p>
           </div>
           
           <p>These API keys are read-only and designed solely for transparency so users can query experiment data without affecting it.</p>

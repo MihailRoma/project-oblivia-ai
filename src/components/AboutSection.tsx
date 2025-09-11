@@ -47,7 +47,7 @@ export const AboutSection: React.FC = () => {
         </div>
         
         <p className="text-terminal-gray text-xs mt-6 pt-4 border-t border-terminal-gray">
-          All of this is powered by <span className="text-terminal-amber">Cursor</span>.
+          Powered by <span className="text-terminal-amber">Cursor</span>
         </p>
       </div>
     </ChromeWindow>

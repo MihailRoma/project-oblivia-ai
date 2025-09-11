@@ -86,19 +86,19 @@ const Index = () => {
                     <AIAgentFolderGroup>
                       <AIAgentFolder 
                         name="Grok AI"
-                        content={`Focus:\n- Raw, chaotic, immersive surface.\n- Glitches and surreal interactions.\n- Encourage exploration beyond convention.`}
+                        content={`Build a highly experimental, chaotic, and immersive website design. Use abstract visuals, unpredictable layouts, and unconventional navigation to evoke mystery and exploration. Prioritize artistic expression over usability.`}
                       />
                       <AIAgentFolder 
                         name="ChatGPT (GPT-4o)"
-                        content={`Focus:\n- Elegant, atmospheric storytelling.\n- Strong typography and visual rhythm.\n- Evoke awe, nostalgia, and wonder.`}
+                        content={`Create an elegant and picturesque website focused on visual storytelling. Use poetic language, rich imagery, and balanced compositions that evoke emotion and wonder. Aim for an artistic, almost dreamlike user experience.`}
                       />
                       <AIAgentFolder 
                         name="Claude"
-                        content={`Focus:\n- Structured information architecture.\n- Clear hierarchy and accessibility.\n- Deliver facts efficiently, no ambiguity.`}
+                        content={`Develop a clear, concise, and highly informational website. Focus on structured content, easy navigation, and practical user needs. Prioritize utility and straightforward communication over flair.`}
                       />
                       <AIAgentFolder 
                         name="Perplexity"
-                        content={`Focus:\n- Fuse art and data seamlessly.\n- Interactive, adaptive layouts.\n- Dynamic yet intelligible presentation.`}
+                        content={`Design an experimental hybrid balancing abstract creativity with informational clarity. Use data-driven layouts and interactive components that invite user engagement. Blend art with functionality.`}
                       />
                     </AIAgentFolderGroup>
                   </div>
@@ -113,7 +113,7 @@ const Index = () => {
                 <input
                   type="text"
                   placeholder="⌗ trace anomalies in recursive corridors — beware the echo"
-                  className="w-10/12 bg-[hsl(var(--cli-bg-secondary))] border border-terminal-pink px-4 py-3 text-terminal-white font-mono text-sm placeholder:text-terminal-gray focus:outline-none focus:ring-2 focus:ring-terminal-pink focus:border-transparent animate-fade-in"
+                  className="w-9/12 bg-[hsl(var(--cli-bg-secondary))] border border-terminal-pink px-4 py-3 text-terminal-white font-mono text-sm placeholder:text-terminal-gray focus:outline-none focus:ring-2 focus:ring-terminal-pink focus:border-transparent animate-fade-in hover-scale transition-all"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       const searchTerm = (e.target as HTMLInputElement).value;

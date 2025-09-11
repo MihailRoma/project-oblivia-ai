@@ -67,7 +67,7 @@ export const TopNavigation: React.FC = () => {
             
             {/* Observatory Dropdown */}
             {observatoryOpen && (
-              <div className="fixed right-4 top-12 bg-[hsl(var(--cli-bg-primary))] border border-terminal-green min-w-[220px] z-[70] shadow-lg backdrop-blur-sm animate-fade-in">
+              <div className="absolute right-0 top-full mt-2 bg-[hsl(var(--cli-bg-primary))] border border-terminal-green min-w-[220px] z-[70] shadow-lg backdrop-blur-sm animate-fade-in">
                 <button
                   className="bg-[hsl(var(--cli-bg-primary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-terminal-green hover:bg-terminal-pink/10 w-full text-left"
                   onClick={handleButtonClick}
@@ -80,7 +80,7 @@ export const TopNavigation: React.FC = () => {
                   onClick={handleButtonClick}
                 >
                   <Globe size={16} />
-                  The Experiment website
+                  Website
                 </button>
               </div>
             )}
