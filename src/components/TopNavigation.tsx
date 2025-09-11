@@ -8,12 +8,10 @@ export const TopNavigation: React.FC = () => {
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>, section?: string) => {
     e.currentTarget.classList.add('animate-laggy-flicker');
+    if (section) setActiveSection(section); // open immediately for responsiveness
     setTimeout(() => {
       e.currentTarget.classList.remove('animate-laggy-flicker');
-      if (section) {
-        setActiveSection(section);
-      }
-    }, 800);
+    }, 400);
   };
 
   const handleObservatoryClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -69,7 +67,7 @@ export const TopNavigation: React.FC = () => {
             
             {/* Observatory Dropdown */}
             {observatoryOpen && (
-              <div className="absolute right-0 top-full mt-1 bg-[hsl(var(--cli-bg-primary))] border border-terminal-green min-w-[200px] z-[60] shadow-lg backdrop-blur-sm animate-fade-in">
+              <div className="fixed right-4 top-12 bg-[hsl(var(--cli-bg-primary))] border border-terminal-green min-w-[220px] z-[70] shadow-lg backdrop-blur-sm animate-fade-in">
                 <button
                   className="bg-[hsl(var(--cli-bg-primary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-terminal-green hover:bg-terminal-pink/10 w-full text-left"
                   onClick={handleButtonClick}
