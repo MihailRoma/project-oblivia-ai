@@ -149,7 +149,7 @@ You always will be.
         </div>
         <button 
           onClick={() => window.location.href = '/'}
-          className="text-terminal-gray hover:text-terminal-white text-sm"
+          className="text-terminal-white/80 hover:text-terminal-white text-sm border border-terminal-pink px-3 py-1 hover:bg-terminal-pink/10 transition"
         >
           EXIT
         </button>
@@ -163,22 +163,6 @@ You always will be.
         </pre>
       </div>
 
-      {/* Control Buttons */}
-      <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-4">
-        <button
-          onClick={handleStop}
-          disabled={!isTyping}
-          className="bg-[hsl(var(--cli-bg-secondary))] border border-terminal-pink px-6 py-2 text-terminal-pink hover:bg-terminal-pink hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Stop
-        </button>
-        <button
-          onClick={handleRestart}
-          className="bg-[hsl(var(--cli-bg-secondary))] border border-terminal-pink px-6 py-2 text-terminal-pink hover:bg-terminal-pink hover:text-black transition-all"
-        >
-          Restart
-        </button>
-      </div>
     </div>
   );
 };

@@ -20,7 +20,7 @@ export const TopNavigation: React.FC = () => {
     e.currentTarget.classList.add('animate-crazy-glitch');
     setTimeout(() => {
       e.currentTarget.classList.remove('animate-crazy-glitch');
-      setObservatoryOpen(!observatoryOpen);
+      setObservatoryOpen(true); // always open after glitch
     }, 600);
   };
 

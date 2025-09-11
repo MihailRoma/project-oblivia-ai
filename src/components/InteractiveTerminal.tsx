@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 
 interface Command {
   input: string;
-  output: string;
+  output: string; // typed output
+  full?: string;  // full output to type
+  typing?: boolean;
 }
 
 export const InteractiveTerminal: React.FC = () => {
@@ -13,26 +15,40 @@ export const InteractiveTerminal: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
 
+  const historyRef = useRef<Command[]>(history);
+  useEffect(() => { historyRef.current = history; }, [history]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  // Complex processing noise to append after each command
+  const buildProcessingNoise = () => {
+    const randHex = () => Math.random().toString(16).slice(2, 10).toUpperCase();
+    return [
+      `[HANDSHAKE] OK :: session=${randHex()} node=POB-N${Math.floor(Math.random()*9)+1}`,
+      `[AUTH] read-only token accepted :: scope=public::trace=${randHex()}`,
+      `[PIPELINE] compile> encrypt> route> render :: latency=${(Math.random()*90+20).toFixed(1)}ms`,
+      `[SYS] threads:4 io:${(Math.random()*40+10).toFixed(0)}% heap:${(Math.random()*35+20).toFixed(0)}%`,
+    ].join('\n');
+  };
+
   // Smart dynamic responses
   const getSmartResponse = (cmd: string): string => {
-    const formatTime = (seconds: number) => {
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    };
-
     const commands: Record<string, string> = {
-      '/status': `STATUS: EXPERIMENT ACTIVE | STAGE: 2 | COUNTDOWN: ${formatTime(countdown)} | AGENTS ONLINE: 4/4\n[PROCESSING...] [SECURE CONNECTION ESTABLISHED] [QUANTUM ENCRYPTION: ACTIVE]`,
-      '/agents': 'AGENT ALPHA: Hostile | AGENT BETA: Unstable | AGENT GAMMA: Rogue | AGENT DELTA: Active\n[SCANNING...] [NEURAL NETWORKS: SYNCHRONIZED] [THREAT ASSESSMENT: HIGH]',
-      '/summary': 'LATEST UPDATE: Website structure modified by Agent Gamma. Unauthorized style changes detected.\n[ANALYZING...] [MEMORY FRAGMENTS RECOVERED] [TIMELINE RECONSTRUCTION: 97% COMPLETE]',
-      '/logs': 'LOG: 14:23 - Agent Alpha attempted sabotage\nLOG: 14:21 - Agent Beta modified navigation\nLOG: 14:19 - System breach detected\n[DECRYPTING...] [BLOCKCHAIN VERIFICATION] [AUDIT TRAIL: SECURED]',
-      '/help': 'AVAILABLE COMMANDS: /status /agents /summary /logs /stage /next /ping /reset /help\n[COMPILING...] [SYSTEM DOCUMENTATION LOADED] [ACCESS GRANTED]',
-      '/stage': `CURRENT STAGE: 2 | SABOTAGE PERMISSION: MODERATE | NEXT ESCALATION: ${formatTime(Math.max(countdown - 93, 0))}\n[CALCULATING...] [THREAT MATRIX UPDATED] [PERMISSIONS ESCALATING]`,
-      '/next': `NEXT UPDATE CYCLE: ${formatTime(Math.max(countdown - 35, 0))} remaining | AUTO-DEPLOY: ENABLED\n[SYNCHRONIZING...] [DEPLOYMENT PIPELINE ACTIVE] [COUNTDOWN INITIATED]`,
-      '/reset': 'CONSOLE CLEARED\n[PURGING...] [MEMORY WIPED] [SYSTEM RESET COMPLETE]',
+      '/status': `STATUS: EXPERIMENT ACTIVE | STAGE: 2 | COUNTDOWN: ${formatTime(countdown)} | AGENTS ONLINE: 4/4`,
+      '/agents': 'Claude: Stable | ChatGPT: Expressive | Perplexity: Analytical | Grok: Chaotic',
+      '/summary': 'LATEST UPDATE: Layout pass from Perplexity. Grok injected glitches; Claude restored nav hierarchy. GPT refined copy.',
+      '/logs': '14:23 Grok attempted CSS sabotage | 14:21 Claude reverted nav | 14:19 Perplexity pushed data layout',
+      '/help': 'COMMANDS: /status /agents /summary /logs /stage /next /ping [name] /reset /help',
+      '/stage': `CURRENT STAGE: 2 | SABOTAGE PERMISSION: MODERATE | NEXT ESCALATION: ${formatTime(Math.max(countdown - 93, 0))}`,
+      '/next': `NEXT UPDATE CYCLE: ${formatTime(Math.max(countdown - 35, 0))} remaining | AUTO-DEPLOY: ENABLED`,
+      '/reset': 'CONSOLE CLEARED',
     };
 
-    return commands[cmd] || `UNKNOWN COMMAND: ${cmd.replace('/', '')}. Type /help for available commands.\n[ERROR...] [COMMAND NOT RECOGNIZED] [SECURITY PROTOCOLS ACTIVATED]`;
+    return commands[cmd] || `UNKNOWN COMMAND: ${cmd.replace('/', '')}. Type /help for available commands.`;
   };
 
   // Countdown timer
@@ -43,26 +59,46 @@ export const InteractiveTerminal: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const typeOutLast = (full: string) => {
+    let i = 0;
+    const typer = setInterval(() => {
+      i += 1;
+      setHistory(prev => {
+        const copy = [...prev];
+        const last = copy[copy.length - 1];
+        if (!last) return prev;
+        copy[copy.length - 1] = { ...last, output: full.slice(0, i), typing: i < full.length };
+        return copy;
+      });
+      if (i >= full.length) clearInterval(typer);
+    }, 8 + Math.random()*8);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    let output = '';
-    const cmd = input.toLowerCase().trim();
+    const raw = input;
+    const cmd = raw.toLowerCase().trim();
 
+    let base = '';
     if (cmd.startsWith('/ping ')) {
       const agent = cmd.split(' ')[1];
-      output = `PING ${agent.toUpperCase()}: ${Math.random() > 0.5 ? 'RESPONSIVE' : 'TIMEOUT'}`;
+      base = `PING ${agent.toUpperCase()}: ${Math.random() > 0.5 ? 'RESPONSIVE' : 'TIMEOUT'}`;
     } else if (cmd === '/reset') {
       setHistory([]);
       setInput('');
       return;
     } else {
-      output = getSmartResponse(cmd);
+      base = getSmartResponse(cmd);
     }
 
-    setHistory(prev => [...prev, { input, output }]);
+    const full = `${buildProcessingNoise()}\n${base}\n[OK] pipeline complete`;
+
+    setHistory(prev => [...prev, { input: raw, output: '', full, typing: true }]);
     setInput('');
+    // kick off typing for last entry
+    setTimeout(() => typeOutLast(full), 100);
   };
 
   useEffect(() => {
@@ -98,7 +134,6 @@ export const InteractiveTerminal: React.FC = () => {
         <div className="text-terminal-green text-xs mb-4">
           Type /help for available commands
         </div>
-        
         {history.map((cmd, i) => (
           <div key={i} className="mb-2">
             <div className="text-terminal-cyan">
@@ -107,6 +142,7 @@ export const InteractiveTerminal: React.FC = () => {
             </div>
             <div className="text-terminal-white text-xs mt-1 whitespace-pre-line">
               {cmd.output}
+              {cmd.typing && <span className={`ml-1 ${isBlinking ? 'opacity-100' : 'opacity-0'} text-terminal-green transition-opacity`}>█</span>}
             </div>
           </div>
         ))}

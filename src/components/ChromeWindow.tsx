@@ -31,11 +31,10 @@ export const ChromeWindow: React.FC<ChromeWindowProps> = ({ title, children, cla
 
 interface AIAgentFolderProps {
   name: string;
-  goal: string;
-  personality: string;
+  content: string;
 }
 
-export const AIAgentFolder: React.FC<AIAgentFolderProps> = ({ name, goal, personality }) => {
+export const AIAgentFolder: React.FC<AIAgentFolderProps> = ({ name, content }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
@@ -53,10 +52,7 @@ export const AIAgentFolder: React.FC<AIAgentFolderProps> = ({ name, goal, person
           <div className="flex items-start space-x-2 mb-2">
             <FileText className="text-terminal-green mt-1 flex-shrink-0" size={14} />
             <div className="min-w-0 flex-1">
-              <div className="text-terminal-green text-xs font-mono mb-1">Goal:</div>
-              <p className="text-terminal-white text-xs leading-relaxed mb-3 break-words overflow-wrap-anywhere">{goal}</p>
-              <div className="text-terminal-green text-xs font-mono mb-1">Personality:</div>
-              <p className="text-terminal-white text-xs leading-relaxed break-words overflow-wrap-anywhere">{personality}</p>
+              <p className="text-terminal-white text-xs leading-relaxed whitespace-pre-wrap break-words">{content}</p>
             </div>
           </div>
         </div>
