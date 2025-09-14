@@ -71,11 +71,6 @@ const Index = () => {
           </div>
         )}
 
-        {/* Stage Roadmap */}
-        {showWarnings && (
-          <StageRoadmap />
-        )}
-
         {/* Chrome Windows */}
         {showWarnings && (
           <div className="w-full max-w-7xl mx-auto mt-16 animate-fade-in-lag">
@@ -111,6 +106,9 @@ const Index = () => {
                 </ChromeWindow>
               </div>
             </div>
+
+            {/* Stage Roadmap */}
+            <StageRoadmap />
 
             {/* Search Bar and Eternal Mode Button */}
             <div className="w-full max-w-4xl mx-auto mt-12 space-y-4">

@@ -41,7 +41,7 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
       </div>
       
       {/* Video container */}
-      <div className={`relative w-48 h-28 bg-[hsl(var(--cli-bg-secondary))] border rounded transition-all duration-300 ${
+      <div className={`relative w-64 h-36 bg-[hsl(var(--cli-bg-secondary))] border rounded transition-all duration-300 ${
         videoUrl ? 'border-terminal-pink hover:shadow-[0_0_15px_hsl(var(--terminal-pink)/0.3)]' : 
         'border-terminal-gray opacity-50'
       }`}>
@@ -88,33 +88,23 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
 };
 
 export const StageRoadmap: React.FC = () => {
-  // Current progress is between stage 1 and 2 (let's say 40% through stage 2)
-  const currentProgress = 1.4; // 1 complete + 0.4 of stage 2
+  // Current progress at Stage 1
+  const currentProgress = 1.0; // Stage 1 complete
 
   const stages = [
-    { stage: 1, title: "Foundation", videoUrl: "/OBLIVIA (1).mp4" },
-    { stage: 2, title: "Tension", videoUrl: undefined },
-    { stage: 3, title: "Chaos", videoUrl: undefined },
-    { stage: 4, title: "Oblivion", videoUrl: undefined }
+    { stage: 1, title: "Phase 1: Veiled Gate", videoUrl: "/OBLIVIA (1).mp4" },
+    { stage: 2, title: "Phase 2: Emergence", videoUrl: undefined },
+    { stage: 3, title: "Phase 3: Rupture", videoUrl: undefined },
+    { stage: 4, title: "Phase 4: Oblivion", videoUrl: undefined }
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-12 animate-fade-in">
-      {/* Section Title */}
-      <div className="text-center mb-12">
-        <h2 className="text-terminal-pink text-xl md:text-2xl font-bold mb-4 animate-[glow_2s_ease-in-out_infinite]">
-          Stage Progression
-        </h2>
-        <p className="text-terminal-white text-base md:text-lg max-w-4xl mx-auto leading-relaxed">
-          With each stage, the AI agents gain powers to rewrite their own code, sabotage their competitors, and unleash escalating chaos.
-        </p>
-      </div>
-
+    <div className="w-full max-w-7xl mx-auto py-8 animate-fade-in">
       {/* Progress Line */}
-      <div className="relative mb-12">
-        <div className="absolute top-4 left-0 right-0 h-0.5 bg-terminal-gray/30"></div>
+      <div className="relative mb-8">
+        <div className="absolute top-6 left-0 right-0 h-1 bg-terminal-gray/30 rounded-full"></div>
         <div 
-          className="absolute top-4 left-0 h-0.5 bg-terminal-pink shadow-[0_0_6px_hsl(var(--terminal-pink))] transition-all duration-1000 ease-out"
+          className="absolute top-6 left-0 h-1 bg-terminal-pink shadow-[0_0_8px_hsl(var(--terminal-pink))] transition-all duration-1000 ease-out rounded-full"
           style={{ width: `${(currentProgress / 4) * 100}%` }}
         ></div>
         
@@ -133,14 +123,11 @@ export const StageRoadmap: React.FC = () => {
         </div>
       </div>
 
-      {/* Current Status */}
+      {/* Subheading under roadmap */}
       <div className="text-center">
-        <div className="inline-flex items-center gap-2 bg-[hsl(var(--cli-bg-secondary))] border border-terminal-pink px-4 py-2 rounded">
-          <div className="w-2 h-2 bg-terminal-pink rounded-full animate-pulse"></div>
-          <span className="text-terminal-pink text-sm font-mono">
-            Current Progress: Stage {Math.floor(currentProgress)} → Stage {Math.floor(currentProgress) + 1}
-          </span>
-        </div>
+        <p className="text-terminal-white text-base md:text-lg max-w-5xl mx-auto leading-relaxed">
+          With each stage, the AI agents gain powers to rewrite their own code, sabotage their competitors, and unleash escalating chaos.
+        </p>
       </div>
     </div>
   );
