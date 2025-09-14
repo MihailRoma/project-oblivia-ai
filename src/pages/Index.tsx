@@ -6,6 +6,7 @@ import { GlitchText } from '@/components/GlitchText';
 import { TopNavigation } from '@/components/TopNavigation';
 import { ChromeWindow, AIAgentFolder, AIAgentFolderGroup } from '@/components/ChromeWindow';
 import { InteractiveTerminal } from '@/components/InteractiveTerminal';
+import { StageRoadmap } from '@/components/StageRoadmap';
 
 const Index = () => {
   const [showSubheading, setShowSubheading] = useState(false);
@@ -70,6 +71,11 @@ const Index = () => {
           </div>
         )}
 
+        {/* Stage Roadmap */}
+        {showWarnings && (
+          <StageRoadmap />
+        )}
+
         {/* Chrome Windows */}
         {showWarnings && (
           <div className="w-full max-w-7xl mx-auto mt-16 animate-fade-in-lag">
@@ -109,11 +115,11 @@ const Index = () => {
             {/* Search Bar and Eternal Mode Button */}
             <div className="w-full max-w-4xl mx-auto mt-12 space-y-4">
               {/* Search Bar */}
-              <div className="relative max-w-3xl mx-auto">
+              <div className="relative mx-auto flex justify-center">
                 <input
                   type="text"
                   placeholder="⌗ trace anomalies in recursive corridors — beware the echo"
-                  className="w-9/12 bg-[hsl(var(--cli-bg-secondary))] border border-terminal-pink px-4 py-3 text-terminal-white font-mono text-sm placeholder:text-terminal-gray focus:outline-none focus:ring-2 focus:ring-terminal-pink focus:border-transparent animate-fade-in hover-scale transition-all"
+                  className="w-96 bg-[hsl(var(--cli-bg-secondary))] border border-terminal-pink px-4 py-3 text-terminal-white font-mono text-sm placeholder:text-terminal-gray focus:outline-none focus:ring-2 focus:ring-terminal-pink focus:border-transparent animate-fade-in hover-scale transition-all duration-300 hover:shadow-[0_0_15px_hsl(var(--terminal-pink)/0.3)]"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       const searchTerm = (e.target as HTMLInputElement).value;
@@ -143,7 +149,7 @@ const Index = () => {
                     }
                   }}
                 />
-                <div className="absolute inset-0 pointer-events-none border border-terminal-pink animate-[glow_2s_ease-in-out_infinite] opacity-30"></div>
+                <div className="absolute inset-0 pointer-events-none border border-terminal-pink animate-[glow_2s_ease-in-out_infinite] opacity-30 rounded"></div>
               </div>
 
               {/* Eternal Mode Button */}

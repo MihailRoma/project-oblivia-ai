@@ -18,7 +18,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ children }
   return (
     <div className="min-h-screen bg-background text-foreground font-terminal relative scanlines crt-scanlines overflow-hidden">
       {/* Status Bar */}
-      <div className="status-bar mt-12 py-1 text-xs opacity-80">
+      <div className="status-bar mt-16 py-1 text-xs opacity-80">
         <span className="warning-text">Status: IN ACTION</span>
         <span className="ml-4 text-terminal-gray">•</span>
         <span className="ml-2 text-terminal-gray">Agents: 4</span>

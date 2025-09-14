@@ -29,7 +29,6 @@ export const TransparencySection: React.FC = () => {
                 <tr><td className="py-1">ChatGPT (GPT-4o)</td><td className="py-1 font-mono">sk-pob-chatgpt-9c3d4e5f7a8b9c7d</td></tr>
                 <tr><td className="py-1">Claude</td><td className="py-1 font-mono">sk-pob-claude-7e8f9a0b1c2d3e4f</td></tr>
                 <tr><td className="py-1">Perplexity</td><td className="py-1 font-mono">sk-pob-perplex-1a2b3c4d5e6f7g8h</td></tr>
-                <tr><td className="py-1">Marco AI*</td><td className="py-1 font-mono">sk-pob-marco-0f1e2d3c4b5a6978</td></tr>
               </tbody>
             </table>
             <p className="text-terminal-gray text-xs mt-2">*Cursor is a supporting AI assisting with website deployment.</p>
