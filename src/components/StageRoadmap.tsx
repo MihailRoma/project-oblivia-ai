@@ -30,18 +30,9 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
   };
 
   return (
-    <div className="relative group">
-      {/* Stage indicator */}
-      <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold mb-2 mx-auto transition-all duration-300 ${
-        isCompleted ? 'bg-terminal-pink border-terminal-pink text-background shadow-[0_0_10px_hsl(var(--terminal-pink))]' :
-        isActive ? 'bg-terminal-pink/30 border-terminal-pink text-terminal-pink animate-pulse' :
-        'bg-transparent border-terminal-gray text-terminal-gray'
-      }`}>
-        {stage}
-      </div>
-      
-      {/* Video container */}
-      <div className={`relative w-64 h-36 bg-[hsl(var(--cli-bg-secondary))] border rounded transition-all duration-300 ${
+    <div className="relative group flex flex-col items-center">
+      {/* Video container - moved above line */}
+      <div className={`relative w-64 h-36 bg-[hsl(var(--cli-bg-secondary))] border rounded transition-all duration-300 mb-4 ${
         videoUrl ? 'border-terminal-pink hover:shadow-[0_0_15px_hsl(var(--terminal-pink)/0.3)]' : 
         'border-terminal-gray opacity-50'
       }`}>
@@ -56,17 +47,15 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
               <source src={videoUrl} type="video/mp4" />
             </video>
             
-            {/* Custom play button overlay */}
+            {/* Custom play button overlay - only shows on hover and when not playing */}
             <div 
-              className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm cursor-pointer transition-opacity duration-200 hover:bg-black/40"
+              className={`absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-200 hover:bg-black/40 ${
+                isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-0 group-hover:opacity-100'
+              }`}
               onClick={handlePlayPause}
             >
               <div className="w-12 h-12 bg-terminal-pink/20 border border-terminal-pink rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-terminal-pink/30 transition-all duration-200">
-                {isPlaying ? (
-                  <Pause size={20} className="text-terminal-pink ml-0.5" />
-                ) : (
-                  <Play size={20} className="text-terminal-pink ml-1" />
-                )}
+                <Play size={20} className="text-terminal-pink ml-1" />
               </div>
             </div>
           </>
@@ -75,6 +64,15 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
             Coming Soon
           </div>
         )}
+      </div>
+      
+      {/* Stage indicator - positioned to connect with line */}
+      <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all duration-300 relative z-10 ${
+        isCompleted ? 'bg-terminal-pink border-terminal-pink text-background shadow-[0_0_10px_hsl(var(--terminal-pink))]' :
+        isActive ? 'bg-terminal-pink/30 border-terminal-pink text-terminal-pink animate-pulse' :
+        'bg-transparent border-terminal-gray text-terminal-gray'
+      }`}>
+        {stage}
       </div>
       
       {/* Stage title */}
@@ -100,16 +98,10 @@ export const StageRoadmap: React.FC = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto py-8 animate-fade-in">
-      {/* Progress Line */}
+      {/* Stage videos and Progress Line */}
       <div className="relative mb-8">
-        <div className="absolute top-6 left-0 right-0 h-1 bg-terminal-gray/30 rounded-full"></div>
-        <div 
-          className="absolute top-6 left-0 h-1 bg-terminal-pink shadow-[0_0_8px_hsl(var(--terminal-pink))] transition-all duration-1000 ease-out rounded-full"
-          style={{ width: `${(currentProgress / 4) * 100}%` }}
-        ></div>
-        
         {/* Stage videos */}
-        <div className="flex justify-between items-start relative z-10">
+        <div className="flex justify-between items-end relative z-10 mb-2">
           {stages.map((stageData, index) => (
             <StageVideo
               key={stageData.stage}
@@ -120,6 +112,15 @@ export const StageRoadmap: React.FC = () => {
               isCompleted={currentProgress > index + 1}
             />
           ))}
+        </div>
+        
+        {/* Progress Line - positioned to connect with stage indicators */}
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-terminal-gray/30 rounded-full"></div>
+          <div 
+            className="absolute top-0 left-0 h-1 bg-terminal-pink shadow-[0_0_8px_hsl(var(--terminal-pink))] transition-all duration-1000 ease-out rounded-full"
+            style={{ width: `${(currentProgress / 4) * 100}%` }}
+          ></div>
         </div>
       </div>
 
