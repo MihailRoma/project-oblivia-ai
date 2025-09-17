@@ -18,7 +18,7 @@ export const TopNavigation: React.FC = () => {
     e.currentTarget.classList.add('animate-crazy-glitch');
     setTimeout(() => {
       e.currentTarget.classList.remove('animate-crazy-glitch');
-      window.open('http://oblivia-observatory.site/', '_blank');
+      setObservatoryOpen(true); // always open after glitch
     }, 600);
   };
 
