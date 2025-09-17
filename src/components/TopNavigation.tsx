@@ -22,6 +22,10 @@ export const TopNavigation: React.FC = () => {
     window.open('https://x.com/ObliviaAI', '_blank');
   };
 
+  const handleLiveLogsClick = () => {
+    window.open('https://pump.fun/board', '_blank');
+  };
+
   return (
     <>
       {/* Navigation Bar */}
@@ -49,6 +53,15 @@ export const TopNavigation: React.FC = () => {
               }}
             >
               Twitter
+            </button>
+            <button 
+              className="bg-[hsl(var(--cli-bg-secondary))] border-none px-4 py-2 text-terminal-white hover:text-terminal-pink transition-colors text-sm"
+              onClick={(e) => {
+                handleButtonClick(e);
+                handleLiveLogsClick();
+              }}
+            >
+              Live logs
             </button>
           </div>
           

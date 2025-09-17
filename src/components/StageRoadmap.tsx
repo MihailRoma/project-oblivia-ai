@@ -34,18 +34,8 @@ const StageVideo: React.FC<StageVideoProps> = ({
         videoRef.pause();
         setIsPlaying(false);
       } else {
-        // For phase 1, play immediately; for others, show loading
-        if (stage === 1) {
-          videoRef.play().catch(console.error);
-          setIsPlaying(true);
-        } else {
-          setIsLoading(true);
-          setTimeout(() => {
-            setIsLoading(false);
-            videoRef.play().catch(console.error);
-            setIsPlaying(true);
-          }, 500);
-        }
+        videoRef.play().catch(console.error);
+        setIsPlaying(true);
       }
     }
   };
@@ -64,16 +54,6 @@ const StageVideo: React.FC<StageVideoProps> = ({
           'border-terminal-gray opacity-50'
         } ${isPlaying ? '' : 'blur-sm hover:blur-none'}`}>
           
-          {/* Loading animation */}
-          {isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center z-20 bg-background/80 rounded">
-              <img 
-                src="/loading-skull.png" 
-                alt="Loading..." 
-                className="w-12 h-12 animate-aggressive-pulse" 
-              />
-            </div>
-          )}
 
           {videoUrl ? (
             <>
