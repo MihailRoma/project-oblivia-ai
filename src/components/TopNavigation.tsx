@@ -14,12 +14,8 @@ export const TopNavigation: React.FC = () => {
     }, 400);
   };
 
-  const handleObservatoryClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.classList.add('animate-crazy-glitch');
-    setTimeout(() => {
-      e.currentTarget.classList.remove('animate-crazy-glitch');
-      window.open('http://oblivia-observatory.site/', '_blank');
-    }, 600);
+  const handleObservatoryClick = () => {
+    window.open('https://oblivia-observatory.site/', '_blank');
   };
 
   const handleTwitterClick = () => {
@@ -60,7 +56,7 @@ export const TopNavigation: React.FC = () => {
           <div className="relative">
             <button
               onClick={handleObservatoryClick}
-              className="observatory-button flex items-center gap-2 text-terminal-pink hover:text-terminal-white transition-colors text-sm px-4 py-2 border border-terminal-pink hover:bg-terminal-pink/20"
+              className="observatory-button flex items-center gap-2 bg-terminal-pink/20 text-terminal-pink hover:text-terminal-white transition-all duration-300 text-sm px-4 py-2 border-2 border-terminal-pink hover:bg-terminal-pink hover:shadow-[0_0_15px_hsl(var(--terminal-pink)/0.5)] font-semibold"
             >
               Observatory <Eye size={16} />
             </button>

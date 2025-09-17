@@ -34,13 +34,18 @@ const StageVideo: React.FC<StageVideoProps> = ({
         videoRef.pause();
         setIsPlaying(false);
       } else {
-        setIsLoading(true);
-        // Show loading for a brief moment to simulate processing
-        setTimeout(() => {
-          setIsLoading(false);
+        // For phase 1, play immediately; for others, show loading
+        if (stage === 1) {
           videoRef.play().catch(console.error);
           setIsPlaying(true);
-        }, 500);
+        } else {
+          setIsLoading(true);
+          setTimeout(() => {
+            setIsLoading(false);
+            videoRef.play().catch(console.error);
+            setIsPlaying(true);
+          }, 500);
+        }
       }
     }
   };
