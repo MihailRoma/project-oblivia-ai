@@ -33,7 +33,12 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ children }
             {children}
           </div>
         ) : (
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center">
+            <img 
+              src="/loading-skull.png" 
+              alt="Loading..." 
+              className="w-16 h-16 animate-aggressive-pulse mb-4" 
+            />
             <div className="typing-text">INITIALIZING PROJECT OBLIVIA...</div>
           </div>
         )}

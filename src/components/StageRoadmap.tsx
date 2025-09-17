@@ -1,27 +1,46 @@
 import React, { useState } from 'react';
-import { Play, Pause } from 'lucide-react';
+import { Play, Lock } from 'lucide-react';
 
 interface StageVideoProps {
   stage: number;
   title: string;
   videoUrl?: string;
+  previewImage?: string;
   isActive: boolean;
   isCompleted: boolean;
   currentProgress: number;
+  isLocked: boolean;
 }
 
-const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActive, isCompleted, currentProgress }) => {
+const StageVideo: React.FC<StageVideoProps> = ({ 
+  stage, 
+  title, 
+  videoUrl, 
+  previewImage,
+  isActive, 
+  isCompleted, 
+  currentProgress,
+  isLocked 
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null);
 
   const handlePlayPause = () => {
+    if (isLocked || !videoUrl) return;
+    
     if (videoRef) {
       if (isPlaying) {
         videoRef.pause();
         setIsPlaying(false);
       } else {
-        videoRef.play().catch(console.error);
-        setIsPlaying(true);
+        setIsLoading(true);
+        // Show loading for a brief moment to simulate processing
+        setTimeout(() => {
+          setIsLoading(false);
+          videoRef.play().catch(console.error);
+          setIsPlaying(true);
+        }, 500);
       }
     }
   };
@@ -34,10 +53,23 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
     <div className="relative flex flex-col items-center">
       {/* Video container */}
       <div className="flex flex-col items-center mb-16">
-        <div className={`relative w-64 h-40 bg-[hsl(var(--cli-bg-secondary))] border rounded transition-all duration-300 group hover:blur-sm ${
+        <div className={`relative w-72 h-48 bg-[hsl(var(--cli-bg-secondary))] border rounded transition-all duration-300 group ${
+          isLocked ? 'border-terminal-gray opacity-70' :
           videoUrl ? 'border-terminal-red hover:shadow-[0_0_15px_hsl(var(--terminal-red)/0.3)]' : 
           'border-terminal-gray opacity-50'
-        } ${isPlaying ? 'blur-none' : ''}`}>
+        } ${isPlaying ? '' : 'blur-sm hover:blur-none'}`}>
+          
+          {/* Loading animation */}
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center z-20 bg-background/80 rounded">
+              <img 
+                src="/loading-skull.png" 
+                alt="Loading..." 
+                className="w-12 h-12 animate-aggressive-pulse" 
+              />
+            </div>
+          )}
+
           {videoUrl ? (
             <>
               <video
@@ -48,27 +80,45 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
                 preload="metadata"
                 muted
                 playsInline
-                poster={stage === 1 ? "/phase1-preview.png" : undefined}
+                poster={previewImage}
               >
                 <source src={videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-              
-              {/* Custom play button overlay - smaller and always visible */}
-              <div 
-                className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-all duration-200 ${
-                  isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'
-                }`}
-                onClick={handlePlayPause}
-              >
-                <div className="w-10 h-10 bg-terminal-red/30 border border-terminal-red rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-terminal-red/50 transition-all duration-200">
-                  <Play size={14} className="text-terminal-red ml-0.5" />
-                </div>
-              </div>
             </>
+          ) : previewImage ? (
+            <img 
+              src={previewImage} 
+              alt={title}
+              className="w-full h-full object-cover rounded"
+            />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-terminal-gray text-sm">
               Coming Soon
+            </div>
+          )}
+
+          {/* Lock overlay for locked phases */}
+          {isLocked && (
+            <div className="absolute inset-0 flex items-center justify-center bg-background/60 rounded">
+              <div className="flex flex-col items-center">
+                <Lock size={24} className="text-terminal-gray mb-2" />
+                <span className="text-xs text-terminal-gray font-mono">LOCKED</span>
+              </div>
+            </div>
+          )}
+          
+          {/* Custom play button overlay */}
+          {!isLocked && (
+            <div 
+              className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-all duration-200 ${
+                isPlaying || isLoading ? 'opacity-0 pointer-events-none' : 'opacity-0 group-hover:opacity-100'
+              }`}
+              onClick={handlePlayPause}
+            >
+              <div className="w-12 h-12 bg-terminal-red/30 border border-terminal-red rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-terminal-red/50 transition-all duration-200">
+                <Play size={16} className="text-terminal-red ml-0.5" />
+              </div>
             </div>
           )}
         </div>
@@ -89,31 +139,57 @@ export const StageRoadmap: React.FC = () => {
   const currentProgress = 1.0; // Stage 1 complete
 
   const stages = [
-    { stage: 1, title: "Phase 1: Veiled Gate", videoUrl: "/OBLIVIA (1).mp4" },
-    { stage: 2, title: "Phase 2: Emergence", videoUrl: undefined },
-    { stage: 3, title: "Phase 3: Rupture", videoUrl: undefined },
-    { stage: 4, title: "Phase 4: Oblivion", videoUrl: undefined }
+    { 
+      stage: 1, 
+      title: "Phase 1: Veiled Gate", 
+      videoUrl: "/OBLIVIA (2).mp4",
+      previewImage: "/phase1-preview.png",
+      isLocked: false
+    },
+    { 
+      stage: 2, 
+      title: "Phase 2: Emergence", 
+      videoUrl: undefined,
+      previewImage: "/phase2-preview.png",
+      isLocked: true
+    },
+    { 
+      stage: 3, 
+      title: "Phase 3: Rupture", 
+      videoUrl: undefined,
+      previewImage: "/phase3-preview.png",
+      isLocked: true
+    },
+    { 
+      stage: 4, 
+      title: "Phase 4: Oblivion", 
+      videoUrl: undefined,
+      previewImage: "/phase4-preview.png",
+      isLocked: true
+    }
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-8 mt-8 mb-8 animate-fade-in">
+    <div className="w-full max-w-7xl mx-auto py-8 mt-8 mb-8 animate-fade-in">
       {/* Stage videos */}
-      <div className="grid grid-cols-4 gap-6 px-4 relative">
+      <div className="grid grid-cols-4 gap-12 px-8 relative">
         {stages.map((stageData, index) => (
           <StageVideo
             key={stageData.stage}
             stage={stageData.stage}
             title={stageData.title}
             videoUrl={stageData.videoUrl}
+            previewImage={stageData.previewImage}
             isActive={currentProgress > index && currentProgress < index + 1}
             isCompleted={currentProgress > index + 1}
             currentProgress={currentProgress}
+            isLocked={stageData.isLocked}
           />
         ))}
       </div>
       
       {/* Progress Line with Numbers */}
-      <div className="relative mt-4 mx-8">
+      <div className="relative mt-4 mx-12">
         {/* Background line */}
         <div className="absolute top-3 left-0 right-0 h-2 bg-terminal-gray/30 rounded-full"></div>
         
