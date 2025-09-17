@@ -59,7 +59,7 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
           isLocked ? 'border-terminal-gray opacity-50' :
           videoUrl || stage === 1 ? 'border-terminal-red hover:shadow-[0_0_15px_hsl(var(--terminal-red)/0.3)]' : 
           'border-terminal-gray opacity-50'
-        } ${isPlaying ? 'blur-none' : 'blur-sm hover:blur-none'}`}>
+        } ${isPlaying ? 'blur-none' : 'blur-[2px] hover:blur-none'}`}>
           
           {/* Loading Animation */}
           {isLoading && (
@@ -67,9 +67,9 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
               <img 
                 src="/loading-orb.png" 
                 alt="Loading"
-                className="w-16 h-16 animate-[pulse_0.5s_ease-in-out_infinite] opacity-80"
+                className="w-16 h-16"
                 style={{
-                  animation: 'pulse 1s ease-in-out infinite, scale-pulse 8s linear forwards'
+                  animation: 'pulse 0.5s ease-in-out infinite, scale-pulse 8s ease-out forwards'
                 }}
               />
             </div>
@@ -91,15 +91,15 @@ const StageVideo: React.FC<StageVideoProps> = ({ stage, title, videoUrl, isActiv
                 Your browser does not support the video tag.
               </video>
               
-              {/* Custom play button overlay */}
+              {/* Custom play button overlay - always visible when not playing */}
               <div 
                 className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-all duration-200 ${
-                  isPlaying || isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100 group-hover:opacity-100'
+                  isPlaying || isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 } ${isLocked ? 'pointer-events-none' : ''}`}
                 onClick={handlePlayPause}
               >
-                <div className="w-12 h-12 bg-terminal-red/30 border border-terminal-red rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-terminal-red/50 transition-all duration-200">
-                  <Play size={16} className="text-terminal-red ml-0.5" />
+                <div className="w-8 h-8 bg-terminal-red/30 border border-terminal-red rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-terminal-red/50 transition-all duration-200">
+                  <Play size={12} className="text-terminal-red ml-0.5" />
                 </div>
               </div>
 
@@ -145,7 +145,7 @@ export const StageRoadmap: React.FC = () => {
   return (
     <div className="w-full max-w-7xl mx-auto py-8 mt-8 mb-8 animate-fade-in">
       {/* Stage videos */}
-      <div className="grid grid-cols-4 gap-8 px-4 relative">
+      <div className="grid grid-cols-4 gap-12 px-8 relative">
         {stages.map((stageData, index) => (
           <StageVideo
             key={stageData.stage}
