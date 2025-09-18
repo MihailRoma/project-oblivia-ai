@@ -34,8 +34,14 @@ const StageVideo: React.FC<StageVideoProps> = ({
         videoRef.pause();
         setIsPlaying(false);
       } else {
-        videoRef.play().catch(console.error);
-        setIsPlaying(true);
+        // Remove poster when playing to ensure video shows
+        videoRef.poster = '';
+        videoRef.currentTime = 0;
+        videoRef.play().then(() => {
+          setIsPlaying(true);
+        }).catch((error) => {
+          console.error('Video play failed:', error);
+        });
       }
     }
   };
@@ -61,8 +67,10 @@ const StageVideo: React.FC<StageVideoProps> = ({
                 ref={setVideoRef}
                 className="w-full h-full object-cover rounded"
                 onEnded={handleVideoEnd}
+                onLoadedData={() => console.log('Video loaded successfully')}
+                onError={(e) => console.error('Video error:', e)}
                 controls={false}
-                preload="metadata"
+                preload="auto"
                 muted
                 playsInline
                 poster={previewImage}
