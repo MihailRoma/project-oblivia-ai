@@ -15,7 +15,12 @@ export const TopNavigation: React.FC = () => {
   };
 
   const handleObservatoryClick = () => {
-    window.open('https://oblivia-observatory.site/', '_blank');
+    // Add glitch effect to body
+    document.body.classList.add('animate-pulse');
+    setTimeout(() => {
+      document.body.classList.remove('animate-pulse');
+      setObservatoryOpen(true);
+    }, 500);
   };
 
   const handleTwitterClick = () => {
@@ -23,7 +28,7 @@ export const TopNavigation: React.FC = () => {
   };
 
   const handleLiveLogsClick = () => {
-    window.open('https://pump.fun/board', '_blank');
+    window.open('https://x.com/ObliviaAI', '_blank');
   };
 
   return (
@@ -74,22 +79,25 @@ export const TopNavigation: React.FC = () => {
               Observatory <Eye size={16} />
             </button>
             
-            {/* Observatory Dropdown */}
+            {/* Observatory Glitchy Panel */}
             {observatoryOpen && (
-              <div className="absolute right-0 top-full mt-2 bg-[hsl(var(--cli-bg-primary))] border border-terminal-green min-w-[220px] z-[70] shadow-lg backdrop-blur-sm animate-fade-in">
+              <div className="absolute right-0 top-full mt-2 bg-[hsl(var(--cli-bg-primary))] border border-terminal-pink min-w-[300px] z-[70] shadow-lg backdrop-blur-sm animate-fade-in p-4">
+                <div className="text-terminal-pink text-sm font-mono animate-pulse mb-3">
+                  <div className="glitch-text mb-2" data-text="ACCESS DENIED">ACCESS DENIED</div>
+                  <div className="text-terminal-white text-xs">
+                    The first version of the website has not been deployed yet.
+                  </div>
+                </div>
                 <button
-                  className="bg-[hsl(var(--cli-bg-primary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm border-b border-terminal-green hover:bg-terminal-pink/10 w-full text-left"
-                  onClick={handleButtonClick}
+                  className="bg-terminal-pink/20 text-terminal-pink hover:text-terminal-white transition-all duration-300 text-sm px-4 py-2 border border-terminal-pink hover:bg-terminal-pink hover:shadow-[0_0_15px_hsl(var(--terminal-pink)/0.5)] font-mono w-full glitch-text"
+                  data-text="See live logs"
+                  onClick={(e) => {
+                    handleButtonClick(e);
+                    window.open('https://x.com/ObliviaAI', '_blank');
+                    setObservatoryOpen(false);
+                  }}
                 >
-                  <Activity size={16} />
-                  Watch logs live
-                </button>
-                <button
-                  className="bg-[hsl(var(--cli-bg-primary))] flex items-center gap-3 px-4 py-3 text-terminal-white hover:text-terminal-pink transition-colors text-sm hover:bg-terminal-pink/10 w-full text-left"
-                  onClick={handleButtonClick}
-                >
-                  <Globe size={16} />
-                  Website
+                  See live logs
                 </button>
               </div>
             )}
